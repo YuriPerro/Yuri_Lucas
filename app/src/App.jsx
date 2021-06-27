@@ -1,9 +1,10 @@
 import React from "react";
 import Routes from "./Routes";
+import './styles/index.css';
 
 function App() {
   return (
-    <div className="min-h-screen flex flex-col items-center p-8 text-base text-white bg-gradient-to-b from-gray-600 to-gray-500">
+    <div className="min-h-screen flex flex-col items-center text-base text-white">
       <Routes />
     </div>
   );

@@ -11,22 +11,6 @@ function Login() {
       <h1 className="text-4xl font-bold mb-14">Login</h1>
 
       <main className="w-full flex gap-8">
-        <aside className="flex-1 w-full">
-          <article className="text-xl mb-16">
-            <p className="mb-4">Bem vindo ao Quizzer.</p>
-            <p className="mb-4">
-              Sistema gamificado para auxiliar no ensino e aprendizado da disciplina Laboratorio de
-              programação Web (DCC121).
-            </p>
-            <p className="mb-4">
-              Aqui você irá encontrar quizzes sobre todo conteúdo da disciplina como HTML, CSS e
-              Javascipt. Entre já e comece a aprender.
-            </p>
-          </article>
-
-          <img src={img} alt="ilustracao" />
-        </aside>
-
         <div className="flex-1 w-full flex flex-col">
           <form
             onSubmit={() => setLocation("/home")}
