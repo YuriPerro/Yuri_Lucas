@@ -5,7 +5,7 @@ import { LogoutIcon } from "@heroicons/react/outline";
 import Input from "../components/Input";
 import Button from "../components/Button";
 
-import logo from '../assets/images/logo-quizzer.png'
+import logo from "../assets/images/logo-quizzer.png";
 
 function Login() {
   const [, setLocation] = useLocation();

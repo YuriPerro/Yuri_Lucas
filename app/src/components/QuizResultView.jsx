@@ -11,7 +11,7 @@ function QuizResultView(props) {
   return (
     <>
       <h2 className="text-2xl w-full text-center mb-5 text-white uppercase tracking-wider">
-        resultado
+        Você concluiu o quiz 🎉
       </h2>
 
       <PieChart
@@ -26,11 +26,11 @@ function QuizResultView(props) {
           Você acertou {rightAnswers} de {totalQuestions} perguntas!
         </p>
         {attempts < 2 && (
-          <Button width="full" color="green" className="mb-4" onClick={startAnotherAttempt}>
+          <Button width="full" color="gray" className="mb-4" onClick={startAnotherAttempt}>
             Tentar novamente
           </Button>
         )}
-        <Button width="full" color="gray" onClick={() => setLocation("/home")}>
+        <Button width="full" color="green" onClick={() => setLocation("/home")}>
           Escolher outro quiz
         </Button>
       </div>

@@ -7,18 +7,18 @@ export const quizzes = [
     difficulty: 1,
     questions: [
       {
-        title: "Qual tag utilizada para criar uma lista ordenada de elementos ?",
+        title: "Qual tag utilizada para criar uma lista ordenada de elementos?",
         options: ["<ol>", "<list>", "<ul>", "<odl>"],
         answerIndex: 0,
       },
       {
-        title: "Qual tag utilizada para criar uma lista não ordenada de elementos ?",
+        title: "Qual tag utilizada para criar uma lista não ordenada de elementos?",
         options: ["<il>", "<ul>", "<ll>", "<ol>"],
         answerIndex: 1,
       },
       {
-        title: "Qual tag utilizada para criar uma lista não ordenada de elementos ?",
-        options: ["<il>", "<ul>", "<ll>", "<ol>"],
+        title: "Qual tag utilizada para definir um item da lista?",
+        options: ["<lo>", "<ul>", "<ll>", "<li>"],
         answerIndex: 3,
       },
     ],
