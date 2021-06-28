@@ -1,10 +1,10 @@
 import React from "react";
 
 function Input(props) {
-  const { className, type = "text" } = props;
+  const { className, type = "text", ...rest } = props;
   return (
     <input
-      {...props}
+      {...rest}
       type={type}
       autoComplete="off"
       className={`mb-4 text-black p-2 px-2 w-full  rounded-md focus:outline-none focus:ring-4 ring-blue-400 ${className}`}
