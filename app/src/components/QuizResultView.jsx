@@ -23,7 +23,7 @@ function QuizResultView(props) {
 
       <div className="w-full max-w-lg text-center text-white text-xl">
         <p className="mb-8">
-          Você acertou {rightAnswers} de {totalQuestions} perguntas!
+          Você acertou {((rightAnswers * 100) / totalQuestions).toFixed(1)}% das perguntas!
         </p>
         {attempts < 2 && (
           <Button width="full" color="green" className="mb-4" onClick={startAnotherAttempt}>

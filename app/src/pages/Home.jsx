@@ -4,6 +4,7 @@ import { useLocation } from "wouter";
 import { LogoutIcon } from "@heroicons/react/outline";
 import Card from "../components/Card";
 import Button from "../components/Button";
+import { quizzes } from "../api/quizzes";
 
 function Home() {
   const [, setLocation] = useLocation();
@@ -23,27 +24,15 @@ function Home() {
         <section className="mb-6">
           <h2 className="text-2xl font-bold mb-4">HTML5 - Linguagem de marcação</h2>
           <div className="grid grid-cols-4 gap-8">
-            <Card
-              onClick={() => setLocation("/quiz/0")}
-              title="Formulários"
-              description="Conteúdo: Construção de formulários semânticos, bem estruturados e de fácil compreensão."
-              footer="Criador por Prof. Igor"
-            />
-            <Card
-              title="Inputs"
-              description="Conteúdo: Os diferentes tipos de inputs, quando utilizar cada um, e suas peculiaridades."
-              footer="Criador por Prof. Igor"
-            />
-            <Card
-              title="Tabelas"
-              description="Conteúdo: Construção de tabelas seguindo padrões de HTML semânticos e possibilitando a separação de dados."
-              footer="Criador por Prof. Igor"
-            />
-            <Card
-              title="Listas"
-              description="Conteúdo: Os diferentes tags de listas possiveis, listas aninhadas e sub listas"
-              footer="Criador por Prof. Igor"
-            />
+            {quizzes.map((quiz, i) => (
+              <Card
+                key={i}
+                onClick={() => setLocation(`/quiz/${i}`)}
+                title={quiz.title}
+                description={quiz.description}
+                footer={`Criador por ${quiz.createdBy}`}
+              />
+            ))}
           </div>
         </section>
 
