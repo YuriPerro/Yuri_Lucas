@@ -1,8 +1,13 @@
 import React from "react";
+import { useLocation } from "wouter";
 
+import { ArrowRightIcon } from "@heroicons/react/outline";
+import Button from "../components/Button";
 import img from "../assets/images/ilustra.png";
 
 function Intro() {
+  const [, setLocation] = useLocation();
+
   return (
     <div className="flex flex-col w-full min-h-screen p-8 bg-purple-500">
       <main className="">
@@ -13,15 +18,14 @@ function Intro() {
               Sistema gamificado para auxiliar no ensino e aprendizado da disciplina Laboratorio de
               programação Web (DCC121).
             </p>
-            <p className="mb-4">
+            <p className="mb-8">
               Aqui você irá encontrar quizzes sobre todo conteúdo da disciplina como HTML, CSS e
               Javascipt. Entre já e comece a aprender.
             </p>
-            <button
-              onClick={() => setLocation("/login")}
-              className="rounded p-3 w-52 bg-green-400 mt-5">
+            <Button color="green" onClick={() => setLocation("/login")}>
               Avançar
-            </button>
+              <ArrowRightIcon className="w-6" />
+            </Button>
           </article>
 
           <img src={img} className="w-auto" alt="ilustracao" />

@@ -1,6 +1,9 @@
 import React from "react";
 import { useLocation } from "wouter";
+
+import { LogoutIcon } from "@heroicons/react/outline";
 import Card from "../components/Card";
+import Button from "../components/Button";
 
 function Home() {
   const [, setLocation] = useLocation();
@@ -10,9 +13,10 @@ function Home() {
       <header className="flex justify-between mb-14">
         <h1 className="text-4xl font-bold">Quizzes</h1>
 
-        <button className="text-2xl" onClick={() => setLocation("/")}>
-          sair
-        </button>
+        <Button color="red" onClick={() => setLocation("/login")}>
+          Sair
+          <LogoutIcon className="w-6" />
+        </Button>
       </header>
 
       <main className="flex-1">
