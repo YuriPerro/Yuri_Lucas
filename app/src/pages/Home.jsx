@@ -10,7 +10,8 @@ function Home() {
   const [, setLocation] = useLocation();
 
   return (
-    <div className="min-h-screen flex flex-col justify-center p-8 bg-gradient-to-b from-gray-600 to-gray-500">
+    <div className="min-h-screen flex flex-col justify-center 
+    p-8 bg-gradient-to-b from-purple-600 to-purple-400">
       <header className="flex justify-between mb-14">
         <h1 className="text-4xl font-bold">Quizzer</h1>
 
