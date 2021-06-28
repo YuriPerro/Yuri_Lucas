@@ -4,6 +4,7 @@ import { quizzes } from "../api/quizzes";
 import Button from "../components/Button";
 import QuizOption from "../components/QuizOption";
 import QuizResultView from "../components/QuizResultView";
+import { ArrowRightIcon } from "@heroicons/react/outline";
 
 function Quiz(props) {
   const quiz = quizzes[props.quizIndex];
@@ -59,9 +60,7 @@ function Quiz(props) {
 
   return (
     <div
-      className={`min-h-screen w-full 
-      transition-all flex flex-col items-center 
-      p-8 bg-gradient-to-b from-gray-500 ${backgroundFeedback}`}>
+      className={`min-h-screen w-full transition-all flex flex-col items-center p-8 bg-gradient-to-b from-gray-500 ${backgroundFeedback}`}>
       <header className="flex justify-between mb-14">
         <h1 className="text-4xl font-bold">Quiz - {quiz.title}</h1>
       </header>
@@ -83,7 +82,7 @@ function Quiz(props) {
               {quiz.questions[currentQuestionIndex].title}
             </h2>
 
-            <ul className="flex flex-col justify-center mb-5 w-full max-w-lg">
+            <ul className="flex flex-col justify-center mb-2 w-full max-w-lg">
               {quiz.questions[currentQuestionIndex].options.map((option, i) => (
                 <QuizOption
                   key={i}
@@ -97,11 +96,12 @@ function Quiz(props) {
 
             {showAnswer && (
               <div className="w-full max-w-lg flex flex-col text-2xl  text-center text-white ">
-                <span className="rounded-lg p-4 mb-4">
+                <span className="rounded-lg mb-8">
                   {selectedOptionStatus ? "Resposta certa !" : " Resposta errada !"}
                 </span>
-                <Button width="full" color="blue" onClick={nextQuestion} className="">
-                  Proxima pergunta
+                <Button width="full" color="blue" onClick={nextQuestion} className="mt-auto">
+                  Próxima
+                  <ArrowRightIcon className="w-6" />
                 </Button>
               </div>
             )}

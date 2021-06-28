@@ -5,16 +5,17 @@ import { LoginIcon } from "@heroicons/react/outline";
 import Card from "../components/Card";
 import Button from "../components/Button";
 import { quizzes } from "../api/quizzes";
+import logo from "../assets/images/logo-quizzer.png";
 
 function Home() {
   const [, setLocation] = useLocation();
 
   return (
-    <div
-      className="min-h-screen flex flex-col justify-center 
-      p-8 bg-gradient-to-b from-purple-600 to-purple-400">
-      <header className="flex justify-between mb-14">
-        <h1 className="text-4xl font-bold">Quizzer</h1>
+    <div className="min-h-screen flex flex-col justify-center p-8 bg-gradient-to-b from-purple-600 to-purple-500">
+      <header className="flex justify-between items-center mb-14 ">
+        <h1 className="text-4xl font-bold flex items-center gap-4 ">
+          <img src={logo} alt="logo" className="w-16" /> Quizzer
+        </h1>
 
         <Button color="red" onClick={() => setLocation("/login")}>
           <LoginIcon className="w-6" />

@@ -16,7 +16,7 @@ function Login() {
   }
 
   return (
-    <div className="flex flex-col p-8 w-full items-center min-h-screen bg-gradient-to-b from-gray-600 to-gray-500">
+    <div className="flex flex-col p-8 w-full items-center min-h-screen bg-gradient-to-bl from-purple-600 to-purple-500">
       <div className="w-28">
         <img src={logo} alt="logo" />
       </div>
@@ -26,7 +26,7 @@ function Login() {
         <div className="w-96">
           <form
             onSubmit={handleSubmit}
-            className="flex flex-col w-full max-w-md ml-auto text-base bg-gradient-to-b from-purple-700 to-purple-600 shadow-lg max-w5 p-8 rounded-md">
+            className="flex flex-col w-full max-w-md ml-auto text-base bg-purple-800 shadow-lg max-w5 p-8 rounded-md">
             <label htmlFor="email" className="mb-2 font-semibold">
               Email
             </label>
@@ -37,7 +37,7 @@ function Login() {
             </label>
             <Input type="password" id="password" name="password" className="mb-10" />
 
-            <Button color="green" type="submit" width="full">
+            <Button color="purple" type="submit" width="full">
               Entrar
               <LogoutIcon className="w-6" />
             </Button>
