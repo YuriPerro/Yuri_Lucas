@@ -54,12 +54,14 @@ function Quiz(props) {
 
   const backgroundFeedback = useMemo(() => {
     if (!showAnswer) return "to-gray-500";
-    return selectedOptionStatus ? "to-green-500" : "to-red-600";
+    return selectedOptionStatus ? "to-green-500" : "to-red-500";
   }, [showAnswer, selectedOptionStatus]);
 
   return (
     <div
-      className={`min-h-screen w-full transition-all flex flex-col items-center p-8 bg-gradient-to-b from-gray-600 ${backgroundFeedback}`}>
+      className={`min-h-screen w-full 
+      transition-all flex flex-col items-center 
+      p-8 bg-gradient-to-b from-gray-500 ${backgroundFeedback}`}>
       <header className="flex justify-between mb-14">
         <h1 className="text-4xl font-bold">Quiz - {quiz.title}</h1>
       </header>
