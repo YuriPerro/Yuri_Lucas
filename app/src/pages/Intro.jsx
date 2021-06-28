@@ -4,15 +4,19 @@ import { useLocation } from "wouter";
 import { ArrowRightIcon } from "@heroicons/react/outline";
 import Button from "../components/Button";
 import img from "../assets/images/ilustra.png";
+import logo from "../assets/images/logo-quizzer.png";
 
 function Intro() {
   const [, setLocation] = useLocation();
 
   return (
-    <div className="flex flex-col w-full min-h-screen p-8 bg-purple-500">
-      <main className="">
-        <aside className="flex-1 w-full grid grid-cols-2">
+    <div className="flex justify-center w-full min-h-screen p-8 bg-gradient-to-bl from-purple-600 to-purple-500">
+      <main className="flex flex-row items-center">
+        <div className="flex flex-row">
           <article className="text-xl mb-16">
+            <div className="w-16 mb-4">
+              <img src={logo} alt="logo" />
+            </div>
             <p className="mb-4">Bem vindo ao Quizzer.</p>
             <p className="mb-4">
               Sistema gamificado para auxiliar no ensino e aprendizado da disciplina Laboratorio de
@@ -28,8 +32,10 @@ function Intro() {
             </Button>
           </article>
 
-          <img src={img} className="w-auto" alt="ilustracao" />
-        </aside>
+          <div className="mt-16">
+            <img src={img} className="" alt="ilustracao" />
+          </div>
+        </div>
       </main>
     </div>
   );

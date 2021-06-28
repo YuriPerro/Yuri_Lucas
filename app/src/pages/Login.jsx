@@ -14,11 +14,11 @@ function Login() {
   }
 
   return (
-    <div className="flex flex-col p-8 w-full min-h-screen bg-gradient-to-b from-gray-600 to-gray-500">
+    <div className="flex flex-col p-8 w-full items-center min-h-screen bg-gradient-to-b from-gray-600 to-gray-500">
       <h1 className="text-4xl font-bold mb-14">Login</h1>
 
-      <main className="w-full flex gap-8">
-        <div className="flex-1 w-full flex flex-col">
+      <main className="flex flex-row justify-center">
+        <div className="">
           <form
             onSubmit={handleSubmit}
             className="flex flex-col w-full max-w-md ml-auto text-base bg-gray-500 shadow-lg max-w5 p-8 rounded-md">
