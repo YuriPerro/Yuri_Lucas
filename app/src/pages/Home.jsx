@@ -24,6 +24,7 @@ function Home() {
           <h2 className="text-2xl font-bold mb-4">HTML5 - Linguagem de marcação</h2>
           <div className="grid grid-cols-4 gap-8">
             <Card
+              onClick={() => setLocation("/quiz/0")}
               title="Formulários"
               description="Conteúdo: Construção de formulários semânticos, bem estruturados e de fácil compreensão."
               footer="Criador por Prof. Igor"

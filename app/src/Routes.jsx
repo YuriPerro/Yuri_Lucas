@@ -12,7 +12,7 @@ function Routes() {
         <Route path="/" component={Intro} />
         <Route path="/login" component={Login} />
         <Route path="/home" component={Home} />
-        <Route path="/quiz/:id">{(params) => <Quiz quizId={params.id} />}</Route>
+        <Route path="/quiz/:index">{(params) => <Quiz quizIndex={params.index} />}</Route>
         <Redirect to="/" />
       </Switch>
     </Router>
