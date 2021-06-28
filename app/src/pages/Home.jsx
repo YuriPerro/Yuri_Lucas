@@ -1,7 +1,7 @@
 import React from "react";
 import { useLocation } from "wouter";
 
-import { LogoutIcon } from "@heroicons/react/outline";
+import { LoginIcon } from "@heroicons/react/outline";
 import Card from "../components/Card";
 import Button from "../components/Button";
 
@@ -11,11 +11,11 @@ function Home() {
   return (
     <div className="min-h-screen flex flex-col justify-center p-8 bg-gradient-to-b from-gray-600 to-gray-500">
       <header className="flex justify-between mb-14">
-        <h1 className="text-4xl font-bold">Quizzes</h1>
+        <h1 className="text-4xl font-bold">Quizzer</h1>
 
         <Button color="red" onClick={() => setLocation("/login")}>
+          <LoginIcon className="w-6" />
           Sair
-          <LogoutIcon className="w-6" />
         </Button>
       </header>
 
