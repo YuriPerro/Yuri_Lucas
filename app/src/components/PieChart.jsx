@@ -11,8 +11,8 @@ const PieChart = (props) => {
         {
           label: "Resultado",
           data: data.values,
-          backgroundColor: ["rgb(74, 135, 235)", "rgb(228, 68, 68)"],
-          hoverBackgroundColor: ["rgba(60, 117, 209, 0.8)", "rgba(228, 68, 68, 0.8)"],
+          backgroundColor: ["rgb(52, 211, 153)", "rgb(228, 68, 68)"],
+          hoverBackgroundColor: ["rgba(52, 211, 153, 0.8)", "rgba(228, 68, 68, 0.8)"],
           borderColor: ["#fff", "#fff"],
           borderWidth: 2,
         },

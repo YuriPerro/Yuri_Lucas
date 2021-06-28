@@ -18,7 +18,7 @@ export const quizzes = [
         answerIndex: 0,
       },
       {
-        title: "Qual tag utilizada para criar uma lista não ordenada de elementos ?",
+        title: "Qual tag utilizada para criar uma lista não ordenada de elementos?",
         options: ["<il>", "<ul>", "<ll>", "<ol>"],
         answerIndex: 1,
       },
