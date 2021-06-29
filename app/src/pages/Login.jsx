@@ -30,12 +30,12 @@ function Login() {
             <label htmlFor="email" className="mb-2 font-semibold">
               Email
             </label>
-            <Input type="email" id="email" name="email" />
+            <Input type="email" id="email" name="email" required />
 
             <label htmlFor="password" className="mb-2 font-semibold">
               Senha
             </label>
-            <Input type="password" id="password" name="password" className="mb-10" />
+            <Input type="password" id="password" name="password" className="mb-10" required />
 
             <Button color="purple" type="submit" width="full">
               Entrar
