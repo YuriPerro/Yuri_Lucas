@@ -16,7 +16,7 @@ function QuizResultView(props) {
 
       <PieChart
         data={{
-          labels: ["Corretas", "Erradas"],
+          labels: ["Respostas corretas", "Respostas incorretas"],
           values: [rightAnswers, totalQuestions - rightAnswers],
         }}
       />

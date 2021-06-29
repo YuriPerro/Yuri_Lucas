@@ -16,15 +16,17 @@ function Intro() {
           <div className="w-16 mb-4">
             <img src={logo} alt="logo" />
           </div>
-          <p className="mb-6 text-3xl font-semibold">Bem vindo ao Quizzer!</p>
+          <p className="mb-8 text-4xl font-semibold">Bem vindo ao Quizzer!</p>
           <p className="mb-4">
-            Sistema gamificado para auxiliar no ensino e aprendizado da disciplina Laboratorio de
-            programação Web (DCC121).
+            O Quizzer é um sistema gamificado para auxiliar no ensino e aprendizado da disciplina
+            laboratório de programação web (DCC121) da UFJF.
           </p>
-          <p className="mb-8">
-            Aqui você irá encontrar quizzes sobre todo conteúdo da disciplina como HTML, CSS e
-            Javascipt. Entre já e comece a aprender.
+          <p className="mb-4">
+            Aqui você irá encontrar quizzes de vários níveis sobre todo conteúdo da disciplina como
+            HTML, CSS e Javascript. E também poderá acumular pontos, subir de nível, adquirir badges
+            e muito mais.
           </p>
+          <p className="mb-8"> Entre já e comece a aprender.</p>
           <Button color="green" onClick={() => setLocation("/login")}>
             Avançar
             <ArrowRightIcon className="w-6" />
