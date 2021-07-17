@@ -1,26 +1,32 @@
 import React from "react";
 import { useLocation } from "wouter";
 
-import { LoginIcon } from "@heroicons/react/outline";
+import { LoginIcon, UserIcon } from "@heroicons/react/outline";
+import { quizzes } from "../api/quizzes";
 import Card from "../components/Card";
 import Button from "../components/Button";
-import { quizzes } from "../api/quizzes";
 import logo from "../assets/images/logo-quizzer.png";
 
 function Home() {
   const [, setLocation] = useLocation();
 
   return (
-    <div className="min-h-screen flex flex-col justify-center p-8 bg-gradient-to-b from-purple-600 to-purple-500">
-      <header className="flex justify-between items-center mb-14 ">
-        <h1 className="text-4xl font-bold flex items-center gap-4 ">
-          <img src={logo} alt="logo" className="w-16" /> Quizzer
+    <div className="flex flex-col min-h-screen w-full p-8 bg-gradient-to-b from-purple-600 to-purple-500">
+      <header className="flex justify-between items-center mb-14">
+        <h1 className="text-4xl font-bold flex items-center gap-4">
+          <img src={logo} alt="logo" className="w-16" /> Início
         </h1>
 
-        <Button color="red" onClick={() => setLocation("/login")}>
-          <LoginIcon className="w-6" />
-          Sair
-        </Button>
+        <div className="flex gap-4">
+          <Button color="green" onClick={() => setLocation("/home")}>
+            <UserIcon className="w-6" />
+            Perfil
+          </Button>
+          <Button color="red" onClick={() => setLocation("/login")}>
+            <LoginIcon className="w-6" />
+            Sair
+          </Button>
+        </div>
       </header>
 
       <main className="flex-1">

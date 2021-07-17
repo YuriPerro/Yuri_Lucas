@@ -9,7 +9,13 @@ import logo from "../assets/images/logo-quizzer.png";
 
 function Login() {
   const [, setLocation] = useLocation();
-  const [form, setForm] = useState({ email: "", password: "", type: "" });
+  const [form, setForm] = useState({
+    name: "",
+    registration: "",
+    email: "",
+    password: "",
+    type: "",
+  });
 
   function handleFormChange(event) {
     const { value, name } = event.target;
@@ -27,13 +33,37 @@ function Login() {
       <div className="w-28">
         <img src={logo} alt="logo" />
       </div>
-      <h1 className="text-4xl font-bold mb-14">Entre no Quizzer</h1>
+      <h1 className="text-4xl font-bold mb-14">Cadastre-se no Quizzer</h1>
 
       <main className="flex flex-row justify-center">
         <div className="w-96">
           <form
             onSubmit={handleSubmit}
             className="flex flex-col w-full max-w-md ml-auto text-base bg-purple-800 shadow-lg max-w5 p-8 rounded-md">
+            <label htmlFor="name" className="mb-2 font-semibold">
+              Nome
+            </label>
+            <Input
+              type="text"
+              id="name"
+              name="name"
+              required
+              value={form.name}
+              onChange={handleFormChange}
+            />
+
+            <label htmlFor="registration" className="mb-2 font-semibold">
+              Matricula
+            </label>
+            <Input
+              type="text"
+              id="registration"
+              name="registration"
+              required
+              value={form.registration}
+              onChange={handleFormChange}
+            />
+
             <label htmlFor="email" className="mb-2 font-semibold">
               Email
             </label>
@@ -75,11 +105,11 @@ function Login() {
             />
 
             <div className="text-right mt-1 mb-6">
-              <Link to="/signup"> Cadastrar-se</Link>
+              <Link to="/login"> Ja possui conta</Link>
             </div>
 
-            <Button color="purple" type="submit" width="full" className="mb-4">
-              Entrar
+            <Button color="purple" type="submit" width="full">
+              Cadastrar
               <LogoutIcon className="w-6" />
             </Button>
           </form>
