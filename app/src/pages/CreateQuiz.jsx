@@ -1,21 +1,22 @@
 import React, { useState } from "react";
 import { useLocation } from "wouter";
 import { XCircleIcon, ClipboardListIcon, PlusIcon } from "@heroicons/react/outline";
+import { useStore } from "../store";
+import { API } from "../api/services";
 
 import Button from "../components/Button";
 import logo from "../assets/images/logo-quizzer.png";
 import Input from "../components/Input";
 import Select from "../components/Select";
 import Label from "../components/Label";
-import LoadingView from "../components/LoadingView";
 
 const makeEmptyQuizForm = () => ({ title: "", description: "", difficulty: 1 });
 const makeEmptyQuestion = () => ({ title: "", options: ["", "", "", ""], answerIndex: 0 });
 const makeEmptyQuestionForm = () => [makeEmptyQuestion()];
 
 const CreateQuiz = () => {
+  const { user, setLoading } = useStore();
   const [, setLocation] = useLocation();
-  const [isLoading, setIsLoading] = useState(false);
   const [quizForm, setQuizForm] = useState(makeEmptyQuizForm());
   const [questionsForm, setQuestionsForm] = useState(makeEmptyQuestionForm());
 
@@ -52,16 +53,25 @@ const CreateQuiz = () => {
   }
 
   function clearAllForm() {
-    setIsLoading(true);
+    setLoading(true);
     setQuizForm(makeEmptyQuizForm());
     setQuestionsForm(makeEmptyQuestionForm());
-    setTimeout(() => setIsLoading(false), 500);
+    setTimeout(() => setLoading(false), 500);
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    console.log({ ...quizForm, questions: [...questionsForm] });
-    if (questionsForm.length < 3) alert("Error! O quiz deve possuir no mínimo três perguntas.");
+  async function handleSubmit(e) {
+    try {
+      e.preventDefault();
+      setLoading(true);
+      const createdBy = user?.name || "SEM_USUARIO";
+      const newQuiz = { ...quizForm, createdBy, questions: [...questionsForm] };
+      await API.addQuiz(newQuiz);
+      clearAllForm();
+    } catch (error) {
+      alert(error.message);
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -127,6 +137,7 @@ const CreateQuiz = () => {
               className="flex flex-col relative bg-purple-800 shadow-lg rounded-md p-6">
               <button
                 type="button"
+                tabIndex="-1"
                 className="absolute -top-2 right-0 text-gray-100 transform translate-x-2 focus:outline-none"
                 title="Excluir pergunta"
                 onClick={() => deleteQuestion(indexQuestion)}>
@@ -189,6 +200,7 @@ const CreateQuiz = () => {
 
           <button
             type="button"
+            tabIndex="-1"
             className="bg-purple-800 shadow-lg rounded-md p-6 focus:outline-none"
             onClick={addNewQuestion}>
             <div className="border-4 p-8 rounded-md border-dotted w-full h-full flex flex-col items-center justify-center">
@@ -206,7 +218,6 @@ const CreateQuiz = () => {
           </Button>
         </div>
       </form>
-      <LoadingView isLoading={isLoading} />
     </div>
   );
 };

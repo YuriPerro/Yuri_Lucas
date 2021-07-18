@@ -4,35 +4,37 @@ import "firebase/auth";
 
 import { Link, useLocation } from "wouter";
 import { LogoutIcon } from "@heroicons/react/outline";
+import { useStore } from "../store";
 
 import Input from "../components/Input";
 import Select from "../components/Select";
 import Button from "../components/Button";
-import LoadingView from "../components/LoadingView";
 import logo from "../assets/images/logo-quizzer.png";
 
 function Login() {
+  const { setUser, setLoading } = useStore();
   const [, setLocation] = useLocation();
-  const [isLoading, setIsLoading] = useState(false);
 
   async function handleSubmit(e) {
     try {
       e.preventDefault();
-      setIsLoading(true);
-      let email = document.getElementById("email").value;
-      let password = document.getElementById("password").value;
-
-      let userType = document.getElementById("userType").value;
+      setLoading(true);
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const userType = document.getElementById("userType").value;
       const resp = await firebase.auth().signInWithEmailAndPassword(email, password);
 
       if (resp) {
-        if (userType === "aluno") setLocation("/home");
-        else setLocation("/dashboard");
+        const isAdmin = userType === "prof" ? true : false;
+        setUser({ email, isAdmin, name: "Usuario atual" });
+
+        if (isAdmin) setLocation("/dashboard");
+        else setLocation("/home");
       }
     } catch (error) {
       alert(error.message);
     } finally {
-      setIsLoading(false);
+      setLoading(false);
     }
   }
 
@@ -81,7 +83,6 @@ function Login() {
           </form>
         </div>
       </main>
-      <LoadingView isLoading={isLoading} />
     </div>
   );
 }

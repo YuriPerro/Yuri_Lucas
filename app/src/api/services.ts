@@ -9,13 +9,22 @@ if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 const auth = firebase.auth();
 
+const getCurrentDate = () => {
+  const today = new Date();
+  let mes = (today.getMonth() + 1).toString();
+  mes = mes.length ? "0" + mes : mes;
+  const dia = today.getDate();
+  const year = today.getFullYear();
+  return dia + "/" + mes + "/" + year;
+};
+
 export const API = {
   addQuiz: async (quiz: QuizDataProps) => {
     try {
       const quizToDB = {
         ...quiz,
         ownerUID: auth.currentUser.uid,
-        createdAt: new Date().toString(),
+        createdAt: getCurrentDate(),
       };
       const resp = await database.ref("quizes/").push(quizToDB);
       if (resp) return true;

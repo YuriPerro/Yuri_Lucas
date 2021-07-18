@@ -32,7 +32,7 @@ function Home() {
       <main className="flex-1">
         <section className="mb-6">
           <h2 className="text-2xl font-bold mb-4">HTML5 - Linguagem de marcação</h2>
-          <div className="grid grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {quizzes.map((quiz, i) => (
               <Card
                 key={i}
@@ -47,7 +47,7 @@ function Home() {
 
         <section className="mb-6">
           <h2 className="text-2xl font-bold mb-4">CSS - Estilização</h2>
-          <div className="grid grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             <Card
               title="Display"
               description="Conteúdo: Uso da propriedade display e suas aplicações na estilização de containers."
@@ -68,7 +68,7 @@ function Home() {
 
         <section className="mb-6">
           <h2 className="text-2xl font-bold mb-4">Javascript - Linguagem de programação</h2>
-          <div className="grid grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             <Card
               title="Variáveis"
               description="Conteúdo: Diferentes tipos de declaração de variáveis, suas formas de declaração e escopos."
