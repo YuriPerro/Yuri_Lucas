@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLocation } from "wouter";
+import firebase from "firebase/app";
+import "firebase/auth";
 
 import { LogoutIcon } from "@heroicons/react/outline";
 import Input from "../components/Input";
@@ -10,9 +12,18 @@ import logo from "../assets/images/logo-quizzer.png";
 function Login() {
   const [, setLocation] = useLocation();
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    setLocation("/home");
+
+    try {
+      let email = document.getElementById("email").value;
+      let password = document.getElementById("password").value;
+      const resp = await firebase.auth().signInWithEmailAndPassword(email, password);
+
+      if (resp) setLocation("/home");
+    } catch (error) {
+      alert(error.message);
+    }
   }
 
   return (

@@ -1,5 +1,11 @@
 import React from "react";
 import Routes from "./Routes";
+import firebase from "firebase/app";
+
+import { firebaseConfig } from "./config/firebase.config";
+
+// Inicializa o app firebase no projeto
+if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
 
 function App() {
   return (
