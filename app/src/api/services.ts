@@ -3,7 +3,6 @@ import "firebase/auth";
 import "firebase/database";
 import { QuizDataProps } from "../@types/types.props";
 import { firebaseConfig } from "../config/firebase.config";
-import { quizzes } from "./quizzes";
 
 if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
 
