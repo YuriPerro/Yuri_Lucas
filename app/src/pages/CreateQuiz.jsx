@@ -7,15 +7,17 @@ import logo from "../assets/images/logo-quizzer.png";
 import Input from "../components/Input";
 import Select from "../components/Select";
 import Label from "../components/Label";
+import LoadingView from "../components/LoadingView";
 
+const makeEmptyQuizForm = () => ({ title: "", description: "", difficulty: 1 });
 const makeEmptyQuestion = () => ({ title: "", options: ["", "", "", ""], answerIndex: 0 });
-const initialQuizForm = { title: "", description: "", difficulty: 1 };
-const initialQuestionsForm = [makeEmptyQuestion(), makeEmptyQuestion(), makeEmptyQuestion()];
+const makeEmptyQuestionForm = () => [makeEmptyQuestion()];
 
 const CreateQuiz = () => {
   const [, setLocation] = useLocation();
-  const [quizForm, setQuizForm] = useState(initialQuizForm);
-  const [questionsForm, setQuestionsForm] = useState(initialQuestionsForm);
+  const [isLoading, setIsLoading] = useState(false);
+  const [quizForm, setQuizForm] = useState(makeEmptyQuizForm());
+  const [questionsForm, setQuestionsForm] = useState(makeEmptyQuestionForm());
 
   function handleQuizFormChange(event) {
     const { value, name } = event.target;
@@ -50,13 +52,16 @@ const CreateQuiz = () => {
   }
 
   function clearAllForm() {
-    setQuizForm({ ...initialQuizForm });
-    setQuestionsForm([...initialQuestionsForm]);
+    setIsLoading(true);
+    setQuizForm(makeEmptyQuizForm());
+    setQuestionsForm(makeEmptyQuestionForm());
+    setTimeout(() => setIsLoading(false), 500);
   }
 
   function handleSubmit(e) {
     e.preventDefault();
     console.log({ ...quizForm, questions: [...questionsForm] });
+    if (questionsForm.length < 3) alert("Error! O quiz deve possuir no mínimo três perguntas.");
   }
 
   return (
@@ -201,6 +206,7 @@ const CreateQuiz = () => {
           </Button>
         </div>
       </form>
+      <LoadingView isLoading={isLoading} />
     </div>
   );
 };
