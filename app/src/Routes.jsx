@@ -7,6 +7,7 @@ import Signup from "./pages/Signup";
 import Home from "./pages/Home";
 import Quiz from "./pages/Quiz";
 import Dashboard from "./pages/Dashboard";
+import CreateQuiz from "./pages/CreateQuiz";
 
 function Routes() {
   return (
@@ -17,6 +18,7 @@ function Routes() {
         <Route path="/signup" component={Signup} />
         <Route path="/home" component={Home} />
         <Route path="/dashboard" component={Dashboard} />
+        <Route path="/create-quiz" component={CreateQuiz} />
         <Route path="/quiz/:index">{(params) => <Quiz quizIndex={params.index} />}</Route>
         <Redirect to="/" />
       </Switch>

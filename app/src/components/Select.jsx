@@ -1,7 +1,7 @@
 import React from "react";
 
 function Select(props) {
-  const { type = "text", options, className, ...rest } = props;
+  const { options, className, ...rest } = props;
 
   return (
     <select
