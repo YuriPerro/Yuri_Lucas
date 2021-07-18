@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useLocation } from "wouter";
 import firebase from "firebase/app";
 import "firebase/auth";
 
