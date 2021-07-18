@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import firebase from "firebase/app";
 import "firebase/auth";
 
@@ -12,22 +12,17 @@ import logo from "../assets/images/logo-quizzer.png";
 
 function Login() {
   const [, setLocation] = useLocation();
-  const [form, setForm] = useState({ email: "", password: "", type: "" });
-
-  function handleFormChange(event) {
-    const { value, name } = event.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
-  }
 
   async function handleSubmit(e) {
-    e.preventDefault();
     try {
+      e.preventDefault();
       let email = document.getElementById("email").value;
       let password = document.getElementById("password").value;
+      let userType = document.getElementById("userType").value;
       const resp = await firebase.auth().signInWithEmailAndPassword(email, password);
 
       if (resp) {
-        if (form.type === "aluno") setLocation("/home");
+        if (userType === "aluno") setLocation("/home");
         else setLocation("/dashboard");
       }
     } catch (error) {
@@ -50,41 +45,23 @@ function Login() {
             <label htmlFor="email" className="mb-2 font-semibold">
               Email
             </label>
-            <Input
-              type="email"
-              id="email"
-              name="email"
-              required
-              value={form.email}
-              onChange={handleFormChange}
-            />
+            <Input type="email" id="email" required />
 
             <label htmlFor="password" className="mb-2 font-semibold">
               Senha
             </label>
-            <Input
-              type="password"
-              id="password"
-              name="password"
-              minLength={4}
-              required
-              value={form.password}
-              onChange={handleFormChange}
-            />
+            <Input type="password" id="password" minLength={4} required />
 
             <label htmlFor="type" className="mb-2 font-semibold">
               Tipo de usuário
             </label>
             <Select
-              id="type"
-              name="type"
+              id="userType"
               required
               options={[
                 { text: "Aluno", value: "aluno" },
                 { text: "Professor", value: "prof" },
               ]}
-              value={form.type}
-              onChange={handleFormChange}
             />
 
             <div className="text-right mt-1 mb-6">
