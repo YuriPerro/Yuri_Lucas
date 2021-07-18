@@ -12,8 +12,8 @@ const Dashboard = () => {
 
   return (
     <div className="flex flex-col w-full min-h-screen p-8 bg-gradient-to-b from-purple-600 to-purple-500">
-      <header className="flex flex-wrap  justify-between items-center mb-14">
-        <h1 className="text-4xl font-bold flex items-center gap-4 mb-4 sm:mb-0">
+      <header className="flex flex-col gap-2 sm:flex-row justify-center sm:justify-between items-center mb-14">
+        <h1 className="text-4xl font-bold flex items-center gap-4 sm:mb-0">
           <img src={logo} alt="logo" className="w-16" /> Gerenciar
         </h1>
 

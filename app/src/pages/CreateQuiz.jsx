@@ -61,8 +61,8 @@ const CreateQuiz = () => {
 
   return (
     <div className="flex flex-col w-full max-w-7xl min-h-screen p-8 bg-gradient-to-b from-purple-600 to-purple-500">
-      <header className="flex flex-wrap  justify-between items-center mb-14">
-        <h1 className="text-4xl font-bold flex items-center gap-4 mb-4 sm:mb-0">
+      <header className="flex flex-col gap-2 sm:flex-row justify-center sm:justify-between items-center mb-14">
+        <h1 className="text-4xl font-bold flex items-center gap-4 sm:mb-0">
           <img src={logo} alt="logo" className="w-16" /> Gerenciar
         </h1>
 
@@ -74,8 +74,8 @@ const CreateQuiz = () => {
         </div>
       </header>
 
-      <form onSubmit={handleSubmit} className="flex-1 w-full transition-all">
-        <section className="transition-all flex gap-4 mb-10 rounded-md p-4 bg-purple-800">
+      <form onSubmit={handleSubmit} className="flex-1 w-full">
+        <section className="flex mb-10 flex-col sm:flex-row sm:gap-4  rounded-md p-4 bg-purple-800">
           <div className="flex-1 flex flex-col">
             <Label htmlFor="titleQuiz">Titulo do Quiz</Label>
             <Input
@@ -115,11 +115,11 @@ const CreateQuiz = () => {
           </div>
         </section>
 
-        <section className="transition-all grid grid-cols-1 sm:grid-cols-2 gap-8 mb-4">
+        <section className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-4">
           {questionsForm.map((question, indexQuestion) => (
             <div
               key={"question" + indexQuestion}
-              className="transition-all flex flex-col relative bg-purple-800 shadow-lg rounded-md p-6">
+              className="flex flex-col relative bg-purple-800 shadow-lg rounded-md p-6">
               <button
                 type="button"
                 className="absolute -top-2 right-0 text-gray-100 transform translate-x-2 focus:outline-none"
@@ -128,15 +128,12 @@ const CreateQuiz = () => {
                 <XCircleIcon className="w-10" />
               </button>
 
-              <div className="flex gap-4">
+              <div className="flex flex-col sm:flex-row sm:gap-4">
                 <div className="flex-1 flex flex-col">
-                  <Label htmlFor={"titleQuestion" + indexQuestion}>
-                    {indexQuestion + 1 + ")"} Pergunta
-                  </Label>
+                  <Label htmlFor={"titleQuestion" + indexQuestion}>Pergunta</Label>
                   <Input
                     id={"titleQuestion" + indexQuestion}
                     name="title"
-                    className="mb-4"
                     required
                     value={question.title}
                     onChange={(e) => handleQuestionFormChange(e, indexQuestion)}
@@ -163,7 +160,7 @@ const CreateQuiz = () => {
                 </div>
               </div>
 
-              <hr className="mb-2" />
+              <hr className="my-2" />
               <span className="mb-1 font-bold">Opções:</span>
               {question.options.map((option, indexOption) => (
                 <div
@@ -189,7 +186,7 @@ const CreateQuiz = () => {
             type="button"
             className="bg-purple-800 shadow-lg rounded-md p-6 focus:outline-none"
             onClick={addNewQuestion}>
-            <div className="border-4 rounded-md border-dotted w-full h-full flex flex-col items-center justify-center">
+            <div className="border-4 p-8 rounded-md border-dotted w-full h-full flex flex-col items-center justify-center">
               <span className="text-2xl">Adicionar nova pergunta</span>
               <PlusIcon className="w-64" />
             </div>
