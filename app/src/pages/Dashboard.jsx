@@ -18,7 +18,7 @@ const Dashboard = () => {
         </h1>
 
         <div className="flex gap-4">
-          <Button color="green">
+          <Button color="green" onClick={() => setLocation("/create-quiz")}>
             <ClipboardListIcon className="w-6" />
             Criar Quiz
           </Button>
