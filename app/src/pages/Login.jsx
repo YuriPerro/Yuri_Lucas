@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import firebase from "firebase/app";
 import "firebase/auth";
 
@@ -8,16 +8,20 @@ import { LogoutIcon } from "@heroicons/react/outline";
 import Input from "../components/Input";
 import Select from "../components/Select";
 import Button from "../components/Button";
+import LoadingView from "../components/LoadingView";
 import logo from "../assets/images/logo-quizzer.png";
 
 function Login() {
   const [, setLocation] = useLocation();
+  const [isLoading, setIsLoading] = useState(false);
 
   async function handleSubmit(e) {
     try {
       e.preventDefault();
+      setIsLoading(true);
       let email = document.getElementById("email").value;
       let password = document.getElementById("password").value;
+
       let userType = document.getElementById("userType").value;
       const resp = await firebase.auth().signInWithEmailAndPassword(email, password);
 
@@ -27,6 +31,8 @@ function Login() {
       }
     } catch (error) {
       alert(error.message);
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -75,6 +81,7 @@ function Login() {
           </form>
         </div>
       </main>
+      <LoadingView isLoading={isLoading} />
     </div>
   );
 }
