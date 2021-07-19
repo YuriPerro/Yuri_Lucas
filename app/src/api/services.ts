@@ -37,9 +37,33 @@ export const API = {
     }
   },
 
-  getQuizByType: async (type: string) => {
+  getAllQuizes: async () => {
     try {
-      const ref = database.ref(`quizes/`).orderByChild("type").equalTo(type);
+      const ref = database.ref(`quizes/`);
+      const quiz = (await ref.once("value")).val();
+      if (quiz) return quiz;
+      else return {};
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  },
+
+  getAllCategories: async () => {
+    try {
+      const ref = database.ref(`quizCategories/`);
+      const quiz = (await ref.once("value")).val();
+      if (quiz) return quiz;
+      else return {};
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  },
+
+  getQuizByCategorie: async (categorie: string) => {
+    try {
+      const ref = database.ref(`quizes/`).orderByChild("categorie").equalTo(categorie);
       const quiz = (await ref.once("value")).val();
       if (quiz) return quiz;
       else return {};
