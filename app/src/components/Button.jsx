@@ -4,7 +4,7 @@ const btnColors = {
   blue: "bg-blue-500 hover:bg-blue-400",
   red: "bg-red-500 hover:bg-red-400",
   green: "bg-green-500 hover:bg-green-400",
-  gray: "bg-gray-300 hover:bg-gray-100 text-gray-800",
+  gray: "bg-gray-100 hover:bg-white text-gray-800",
   purple: "bg-purple-500 hover:bg-purple-400",
 };
 

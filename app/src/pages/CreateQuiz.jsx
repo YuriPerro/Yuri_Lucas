@@ -75,7 +75,7 @@ const CreateQuiz = () => {
   }
 
   return (
-    <div className="flex flex-col w-full max-w-7xl min-h-screen p-8 bg-gradient-to-b from-purple-600 to-purple-500">
+    <div className="flex flex-col w-full max-w-7xl min-h-screen p-8 bg-gradient-to-b from-gray-400 to-gray-400">
       <header className="flex flex-col gap-2 sm:flex-row justify-center sm:justify-between items-center mb-14">
         <h1 className="text-4xl font-bold flex items-center gap-4 sm:mb-0">
           <img src={logo} alt="logo" className="w-16" /> Gerenciar
@@ -90,7 +90,7 @@ const CreateQuiz = () => {
       </header>
 
       <form onSubmit={handleSubmit} className="flex-1 w-full">
-        <section className="flex mb-10 flex-col sm:flex-row sm:gap-4  rounded-md p-4 bg-purple-800">
+        <section className="flex mb-10 flex-col sm:flex-row sm:gap-4 rounded-md p-4 bg-gray-500">
           <div className="flex-1 flex flex-col">
             <Label htmlFor="titleQuiz">Titulo do Quiz</Label>
             <Input
@@ -134,7 +134,7 @@ const CreateQuiz = () => {
           {questionsForm.map((question, indexQuestion) => (
             <div
               key={"question" + indexQuestion}
-              className="flex flex-col relative bg-purple-800 shadow-lg rounded-md p-6">
+              className="flex flex-col relative bg-gray-500 shadow-lg rounded-md p-6">
               <button
                 type="button"
                 tabIndex="-1"
@@ -201,7 +201,7 @@ const CreateQuiz = () => {
           <button
             type="button"
             tabIndex="-1"
-            className="bg-purple-800 shadow-lg rounded-md p-6 focus:outline-none"
+            className="bg-gray-500 shadow-lg rounded-md p-6 focus:outline-none"
             onClick={addNewQuestion}>
             <div className="border-4 p-8 rounded-md border-dotted w-full h-full flex flex-col items-center justify-center">
               <span className="text-2xl">Adicionar nova pergunta</span>
@@ -209,7 +209,8 @@ const CreateQuiz = () => {
             </div>
           </button>
         </section>
-        <div className="flex gap-4">
+
+        <div className="flex gap-8">
           <Button type="button" color="gray" width="full" onClick={clearAllForm}>
             Limpar todos campos
           </Button>
