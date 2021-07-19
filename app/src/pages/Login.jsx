@@ -10,6 +10,10 @@ import Input from "../components/Input";
 import Select from "../components/Select";
 import Button from "../components/Button";
 import logo from "../assets/images/logo-quizzer.png";
+import { API } from "../api/services";
+
+const PROFESSOR = "professor";
+const ALUNO = "aluno";
 
 function Login() {
   const { setUser, setLoading } = useStore();
@@ -22,14 +26,24 @@ function Login() {
       const email = document.getElementById("email").value;
       const password = document.getElementById("password").value;
       const userType = document.getElementById("userType").value;
-      const resp = await firebase.auth().signInWithEmailAndPassword(email, password);
+      const resp = await API.auth.signInWithEmailAndPassword(email, password);
 
       if (resp) {
+        const userDB = await API.getUserById(resp.user.uid);
         const isAdmin = userType === "prof" ? true : false;
-        setUser({ email, isAdmin, name: "Usuario atual" });
 
-        if (isAdmin) setLocation("/dashboard");
-        else setLocation("/home");
+        if (isAdmin && userDB.usertype === PROFESSOR) {
+          setUser({ email, isAdmin, name: userDB.name });
+          setLocation("/dashboard");
+        } else if (!isAdmin && userDB.usertype === ALUNO) {
+          setLocation("/home");
+        } else {
+          await API.auth.signOut();
+          alert(
+            "Ops, não foi possivel fazer o login." +
+              " Verifique seu tipo de usuário e tente novamente!",
+          );
+        }
       }
     } catch (error) {
       alert(error.message);
