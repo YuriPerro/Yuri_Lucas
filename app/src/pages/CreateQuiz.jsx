@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { XCircleIcon, ClipboardListIcon, PlusIcon } from "@heroicons/react/outline";
 import { useStore } from "../store";
@@ -10,13 +10,14 @@ import Input from "../components/Input";
 import Select from "../components/Select";
 import Label from "../components/Label";
 
-const makeEmptyQuizForm = () => ({ title: "", description: "", difficulty: 1 });
+const makeEmptyQuizForm = () => ({ title: "", description: "", difficulty: 1, categorie: "" });
 const makeEmptyQuestion = () => ({ title: "", options: ["", "", "", ""], answerIndex: 0 });
 const makeEmptyQuestionForm = () => [makeEmptyQuestion()];
 
 const CreateQuiz = () => {
   const { user, setLoading } = useStore();
   const [, setLocation] = useLocation();
+  const [categories, setCategories] = useState([]);
   const [quizForm, setQuizForm] = useState(makeEmptyQuizForm());
   const [questionsForm, setQuestionsForm] = useState(makeEmptyQuestionForm());
 
@@ -65,6 +66,10 @@ const CreateQuiz = () => {
       setLoading(true);
       const createdBy = user?.name || "SEM_USUARIO";
       const newQuiz = { ...quizForm, createdBy, questions: [...questionsForm] };
+      if (!newQuiz.questions.length) {
+        setLoading(false);
+        throw new Error("Quiz precisa ter pelo menos uma pergunta");
+      }
       await API.addQuiz(newQuiz);
       clearAllForm();
     } catch (error) {
@@ -73,6 +78,16 @@ const CreateQuiz = () => {
       setLoading(false);
     }
   }
+
+  useEffect(() => {
+    API.getAllCategories().then((data) => {
+      const dataCategories = Object.values(data).map((categorie) => ({
+        ...categorie,
+        text: categorie.name,
+      }));
+      setCategories(dataCategories);
+    });
+  }, []);
 
   return (
     <div className="flex flex-col w-full max-w-7xl min-h-screen p-8 bg-gradient-to-b from-gray-400 to-gray-400">
@@ -90,43 +105,63 @@ const CreateQuiz = () => {
       </header>
 
       <form onSubmit={handleSubmit} className="flex-1 w-full">
-        <section className="flex mb-10 flex-col sm:flex-row sm:gap-4 rounded-md p-4 bg-gray-500">
-          <div className="flex-1 flex flex-col">
-            <Label htmlFor="titleQuiz">Titulo do Quiz</Label>
-            <Input
-              id="titleQuiz"
-              name="title"
-              required
-              value={quizForm.title}
-              onChange={handleQuizFormChange}
-            />
+        <section className="flex mb-10 flex-col sm:gap-4 rounded-md p-4 bg-gray-500">
+          <div className="flex sm:flex-row flex-col flex-1 sm:gap-4">
+            <div className="flex-1 flex flex-col">
+              <Label htmlFor="titleQuiz">Titulo do Quiz</Label>
+              <Input
+                id="titleQuiz"
+                name="title"
+                required
+                value={quizForm.title}
+                onChange={handleQuizFormChange}
+              />
+            </div>
+
+            <div className="w-96 flex flex-col">
+              <Label htmlFor="categorie" className="mb-2 font-semibold">
+                Categoria
+              </Label>
+              <Select
+                id="categorie"
+                name="categorie"
+                required
+                options={categories}
+                value={quizForm.categorie}
+                onChange={handleQuizFormChange}
+              />
+            </div>
           </div>
-          <div className="flex-1 flex flex-col">
-            <Label htmlFor="description">Descrição</Label>
-            <Input
-              id="description"
-              name="description"
-              required
-              value={quizForm.description}
-              onChange={handleQuizFormChange}
-            />
-          </div>
-          <div className="w-36 flex flex-col">
-            <Label htmlFor="difficulty" className="mb-2 font-semibold">
-              Dificuldade
-            </Label>
-            <Select
-              id="difficulty"
-              name="difficulty"
-              required
-              options={[
-                { text: "Fácil", value: 1 },
-                { text: "Médio", value: 2 },
-                { text: "Difícil", value: 3 },
-              ]}
-              value={quizForm.difficulty}
-              onChange={handleQuizFormChange}
-            />
+
+          <div className="flex sm:flex-row flex-col flex-1 sm:gap-4">
+            <div className="flex-1 flex flex-col">
+              <Label htmlFor="description">Descrição</Label>
+              <Input
+                id="description"
+                name="description"
+                required
+                value={quizForm.description}
+                onChange={handleQuizFormChange}
+              />
+            </div>
+
+            <div className="w-52 flex flex-col">
+              <Label htmlFor="difficulty" className="mb-2 font-semibold">
+                Dificuldade
+              </Label>
+              <Select
+                id="difficulty"
+                name="difficulty"
+                required
+                options={[
+                  { text: "Fácil", value: 1 },
+                  { text: "Médio", value: 2 },
+                  { text: "Difícil", value: 3 },
+                ]}
+                value={quizForm.difficulty}
+                onChange={handleQuizFormChange}
+              />
+            </div>
           </div>
         </section>
 
