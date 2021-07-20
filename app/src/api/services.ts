@@ -29,7 +29,13 @@ export const API = {
         ownerUID: auth.currentUser.uid,
         createdAt: getCurrentDate(),
       };
-      const resp = await database.ref("quizes/").push(quizToDB);
+      const resp = await database
+        .ref("quizes/")
+        .push(quizToDB)
+        .then(async (res) => {
+          const id = res.key;
+          return await database.ref("quizes/" + id + "/").update({ id: id });
+        });
       if (resp) return true;
     } catch (error) {
       console.log(error);
