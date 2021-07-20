@@ -9,7 +9,7 @@ import { useStore } from "../store";
 
 function Home() {
   const [, setLocation] = useLocation();
-  const { categories } = useStore();
+  const { categories, user } = useStore();
 
   return (
     <div className="flex flex-col min-h-screen w-full p-8 bg-gradient-to-b from-purple-600 to-purple-500">
@@ -18,7 +18,11 @@ function Home() {
           <img src={logo} alt="logo" className="w-16" /> Início
         </h1>
 
-        <div className="flex gap-4">
+        <div className="flex gap-4 items-center">
+          <span>
+            Bem vindo
+            <span className="font-semibold"> {user.name}!</span>
+          </span>
           <Button color="green" onClick={() => setLocation("/profile")}>
             <UserIcon className="w-6" />
             Perfil
