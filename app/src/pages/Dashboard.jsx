@@ -16,7 +16,7 @@ const Dashboard = () => {
       if (!user) return true;
       return quiz.ownerUID === user.uid;
     });
-  }, []);
+  }, [quizzes]);
 
   return (
     <div className="flex flex-col w-full min-h-screen p-8 bg-gradient-to-b from-gray-400 to-gray-400">
