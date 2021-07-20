@@ -96,4 +96,16 @@ export const API = {
       return false;
     }
   },
+
+  getQuizByUserId: async (userId: string) => {
+    try {
+      const ref = database.ref(`quizes/`).orderByChild("ownerUID").equalTo(userId);
+      const quiz = (await ref.once("value")).val();
+      if (quiz) return quiz;
+      else return {};
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  },
 };

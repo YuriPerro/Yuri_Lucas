@@ -2,22 +2,23 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "wouter";
 
 import { LoginIcon, UserIcon } from "@heroicons/react/outline";
-import { quizzes } from "../api/quizzes";
-import Card from "../components/Card";
 import Button from "../components/Button";
 import logo from "../assets/images/logo-quizzer.png";
 import { ListQuizzes } from "../components/ListQuizzes";
 import { API } from "../api/services";
+import { useStore } from "../store";
 
 function Home() {
   const [, setLocation] = useLocation();
-
   const [categories, setCategories] = useState({});
+  const { setLoading } = useStore();
 
   useEffect(() => {
     async function getCategories() {
+      setLoading(true);
       const resp = await API.getAllCategories();
       if (resp) setCategories(resp);
+      setLoading(false);
     }
 
     getCategories();

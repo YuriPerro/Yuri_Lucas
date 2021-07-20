@@ -12,11 +12,11 @@ function LoadingView({ isLoading }) {
     <div className="z-50">
       <div
         onClick={preventClick}
-        className="w-full h-full fixed block top-0 left-0 bg-white opacity-50 z-50"></div>
+        className="w-full h-full fixed block top-0 left-0 bg-white opacity-20 z-50"></div>
       <svg
         onClick={preventClick}
         className="svg-inline--fa fa-circle-notch fa-w-16 w-32 z-50
-        fixed spin-centred text-purple-500"
+        fixed spin-centred text-purple-800"
         aria-hidden="true"
         focusable="false"
         data-prefix="fas"
