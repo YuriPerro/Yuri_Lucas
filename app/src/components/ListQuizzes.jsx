@@ -21,6 +21,7 @@ export const ListQuizzes = ({ categorie }) => {
               onClick={() => setLocation(`/quiz/${quiz.id}`)}
               title={quiz.title}
               description={quiz.description}
+              difficulty={quiz.difficulty}
               footer={`Criador por ${quiz.createdBy}`}
             />
           ))
