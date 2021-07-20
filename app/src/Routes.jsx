@@ -23,7 +23,7 @@ function Routes() {
         <Route path="/profile" component={Profile} />
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/create-quiz" component={CreateQuiz} />
-        <Route path="/quiz/:index">{(params) => <Quiz quizIndex={params.index} />}</Route>
+        <Route path="/quiz/:id">{(params) => <Quiz quizId={params.id} />}</Route>
         <Route path="/" component={Intro} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />

@@ -10,18 +10,21 @@ import { useStore } from "../store";
 
 function Home() {
   const [, setLocation] = useLocation();
-  const [categories, setCategories] = useState({});
-  const { setLoading } = useStore();
+  const [categories, setCategories] = useState([]);
+  const { setLoading, setQuizzes } = useStore();
 
   useEffect(() => {
-    async function getCategories() {
+    async function fetchData() {
       setLoading(true);
-      const resp = await API.getAllCategories();
-      if (resp) setCategories(resp);
+      const dataCategories = await API.getAllCategories();
+      const dataQuizzes = await API.getAllQuizes();
+
+      if (dataCategories) setCategories(Object.values(dataCategories));
+      if (dataQuizzes) setQuizzes(Object.values(dataQuizzes));
       setLoading(false);
     }
 
-    getCategories();
+    fetchData();
   }, []);
 
   return (
@@ -44,10 +47,10 @@ function Home() {
       </header>
 
       <main className="flex-1">
-        {Object.keys(categories).map((id, index) => (
-          <div key={id}>
-            <h2 className="text-2xl font-bold mb-4">{categories[id].name}</h2>
-            <ListQuizzes categorie={categories[id].value} />
+        {categories.map((categorie, i) => (
+          <div key={categorie.name + i}>
+            <h2 className="text-2xl font-bold mb-4">{categorie.name}</h2>
+            <ListQuizzes categorie={categorie.value} />
           </div>
         ))}
       </main>

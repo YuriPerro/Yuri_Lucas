@@ -1,29 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useMemo } from "react";
 import { useLocation } from "wouter";
-import { API } from "../api/services";
+import { useStore } from "../store";
 import Card from "./Card";
 
 export const ListQuizzes = ({ categorie }) => {
   const [, setLocation] = useLocation();
-  const [quizzes, setQuizzes] = useState([]);
+  const { quizzes } = useStore();
 
-  useEffect(() => {
-    async function getQuizzes() {
-      const resp = await API.getQuizByCategorie(categorie);
-      if (resp) setQuizzes(Object.values(resp));
-    }
-
-    getQuizzes();
-  }, []);
+  const quizzesFiltered = useMemo(() => {
+    return quizzes.filter((quiz) => quiz.categorie === categorie);
+  }, [categorie, quizzes]);
 
   return (
     <section className="mb-6">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-        {quizzes.length ? (
-          quizzes.map((quiz, i) => (
+        {quizzesFiltered.length ? (
+          quizzesFiltered.map((quiz) => (
             <Card
-              key={i}
-              onClick={() => setLocation(`/quiz/${i}`)}
+              key={quiz.id}
+              onClick={() => setLocation(`/quiz/${quiz.id}`)}
               title={quiz.title}
               description={quiz.description}
               footer={`Criador por ${quiz.createdBy}`}
