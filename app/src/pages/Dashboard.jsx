@@ -38,6 +38,7 @@ const Dashboard = () => {
                 key={i}
                 onClick={() => setLocation(`/quiz/${i}`)}
                 title={quiz.title}
+                difficulty={quiz.difficulty}
                 description={quiz.description}
               />
             ))}
@@ -46,6 +47,7 @@ const Dashboard = () => {
                 key={i}
                 onClick={() => setLocation(`/quiz/${i}`)}
                 title={quiz.title}
+                difficulty={quiz.difficulty}
                 description={quiz.description}
               />
             ))}
@@ -54,6 +56,7 @@ const Dashboard = () => {
                 key={i}
                 onClick={() => setLocation(`/quiz/${i}`)}
                 title={quiz.title}
+                difficulty={quiz.difficulty}
                 description={quiz.description}
               />
             ))}
