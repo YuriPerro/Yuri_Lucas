@@ -173,7 +173,7 @@ const CreateQuiz = () => {
               <button
                 type="button"
                 tabIndex="-1"
-                className="absolute -top-2 right-0 text-gray-100 transform translate-x-2 focus:outline-none"
+                className="absolute -top-2 right-0 text-gray-100 transform translate-x-2 focus:outline-none hover:text-red-400"
                 title="Excluir pergunta"
                 onClick={() => deleteQuestion(indexQuestion)}>
                 <XCircleIcon className="w-10" />

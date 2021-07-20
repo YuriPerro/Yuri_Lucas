@@ -32,7 +32,7 @@ function Home() {
         </h1>
 
         <div className="flex gap-4">
-          <Button color="green" onClick={() => setLocation("/home")}>
+          <Button color="green" onClick={() => setLocation("/profile")}>
             <UserIcon className="w-6" />
             Perfil
           </Button>

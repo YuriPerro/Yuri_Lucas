@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "wouter";
 import { API } from "../api/services";
 import Card from "./Card";
 
 export const ListQuizzes = ({ categorie }) => {
+  const [, setLocation] = useLocation();
   const [quizes, setQuizes] = useState([]);
 
   useEffect(() => {
