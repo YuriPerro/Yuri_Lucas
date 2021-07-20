@@ -15,7 +15,7 @@ const makeEmptyQuestion = () => ({ title: "", options: ["", "", "", ""], answerI
 const makeEmptyQuestionForm = () => [makeEmptyQuestion()];
 
 const CreateQuiz = () => {
-  const { user, setLoading, categories } = useStore();
+  const { user, quizzes, setLoading, categories, setQuizzes } = useStore();
   const [, setLocation] = useLocation();
   const [quizForm, setQuizForm] = useState(makeEmptyQuizForm());
   const [questionsForm, setQuestionsForm] = useState(makeEmptyQuestionForm());
@@ -64,12 +64,19 @@ const CreateQuiz = () => {
       e.preventDefault();
       setLoading(true);
       const createdBy = user?.name || "SEM_USUARIO";
-      const newQuiz = { ...quizForm, createdBy, questions: [...questionsForm] };
+      const difficulty = parseInt(quizForm.difficulty, 10) || 1;
+      const newQuiz = {
+        ...quizForm,
+        difficulty,
+        createdBy,
+        questions: [...questionsForm],
+      };
       if (!newQuiz.questions.length) {
         setLoading(false);
         throw new Error("Quiz precisa ter pelo menos uma pergunta");
       }
       await API.addQuiz(newQuiz);
+      setQuizzes([...quizzes, { ...newQuiz, ownerUID: user.uid, id: Math.random() * 1000 }]);
       clearAllForm();
     } catch (error) {
       alert(error.message);
