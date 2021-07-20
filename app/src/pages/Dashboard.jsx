@@ -1,14 +1,22 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useLocation } from "wouter";
-import { quizzes } from "../api/quizzes";
 
 import { LoginIcon, ClipboardListIcon } from "@heroicons/react/outline";
 import Card from "../components/Card";
 import Button from "../components/Button";
 import logo from "../assets/images/logo-quizzer.png";
+import { useStore } from "../store";
 
 const Dashboard = () => {
   const [, setLocation] = useLocation();
+  const { quizzes, user } = useStore();
+
+  const quizzesFiltered = useMemo(() => {
+    return quizzes.filter((quiz) => {
+      if (!user) return true;
+      return quiz.ownerUID === user.uid;
+    });
+  }, []);
 
   return (
     <div className="flex flex-col w-full min-h-screen p-8 bg-gradient-to-b from-gray-400 to-gray-400">
@@ -33,28 +41,9 @@ const Dashboard = () => {
         <section className="mb-6">
           <h2 className="text-2xl font-bold mb-4">Seus quizzes</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 ">
-            {quizzes.map((quiz, i) => (
+            {quizzesFiltered.map((quiz) => (
               <Card
-                key={i}
-                onClick={() => setLocation(`/quiz/${i}`)}
-                title={quiz.title}
-                difficulty={quiz.difficulty}
-                description={quiz.description}
-              />
-            ))}
-            {quizzes.map((quiz, i) => (
-              <Card
-                key={i}
-                onClick={() => setLocation(`/quiz/${i}`)}
-                title={quiz.title}
-                difficulty={quiz.difficulty}
-                description={quiz.description}
-              />
-            ))}
-            {quizzes.map((quiz, i) => (
-              <Card
-                key={i}
-                onClick={() => setLocation(`/quiz/${i}`)}
+                key={quiz.id}
                 title={quiz.title}
                 difficulty={quiz.difficulty}
                 description={quiz.description}
