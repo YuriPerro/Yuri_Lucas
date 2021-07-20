@@ -21,6 +21,7 @@ const getCurrentDate = () => {
 export const API = {
   database: database,
   auth: auth,
+  singleUserRef: (uid: string) => database.ref("users/" + uid),
 
   addQuiz: async (quiz: QuizDataProps) => {
     try {

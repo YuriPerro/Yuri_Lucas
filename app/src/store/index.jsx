@@ -27,7 +27,25 @@ export function StoreProvider({ children }) {
     setTimeout(() => setIsisFetching(false), 200);
   }
 
-  useEffect(() => fetchInitialData(), []);
+  const fetchUser = () => {
+    API.auth.onAuthStateChanged((user) => {
+      if (user) {
+        API.singleUserRef(user.uid).once("value", (data) => {
+          const userDB = data.val();
+
+          if (userDB) {
+            const isAdmin = userDB.isAdmin ? true : false;
+            setUser({ isAdmin, ...userDB });
+          }
+        });
+      }
+    });
+  };
+
+  useEffect(() => {
+    fetchInitialData();
+    fetchUser();
+  }, []);
 
   return (
     <StoreContext.Provider
