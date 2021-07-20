@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "wouter";
 
 import { LoginIcon, UserIcon } from "@heroicons/react/outline";
-import { quizzes } from "../api/quizzes";
-import Card from "../components/Card";
 import Button from "../components/Button";
 import logo from "../assets/images/logo-quizzer.png";
 import { ListQuizzes } from "../components/ListQuizzes";
@@ -31,7 +29,7 @@ function Home() {
         </h1>
 
         <div className="flex gap-4">
-          <Button color="green" onClick={() => setLocation("/home")}>
+          <Button color="green" onClick={() => setLocation("/profile")}>
             <UserIcon className="w-6" />
             Perfil
           </Button>

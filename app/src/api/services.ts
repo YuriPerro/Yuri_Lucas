@@ -40,8 +40,8 @@ export const API = {
   getAllQuizes: async () => {
     try {
       const ref = database.ref(`quizes/`);
-      const quiz = (await ref.once("value")).val();
-      if (quiz) return quiz;
+      const resp = (await ref.once("value")).val();
+      if (resp) return resp;
       else return {};
     } catch (error) {
       console.log(error);
@@ -52,8 +52,8 @@ export const API = {
   getAllCategories: async () => {
     try {
       const ref = database.ref(`quizCategories/`);
-      const quiz = (await ref.once("value")).val();
-      if (quiz) return quiz;
+      const resp = (await ref.once("value")).val();
+      if (resp) return resp;
       else return {};
     } catch (error) {
       console.log(error);
@@ -64,8 +64,8 @@ export const API = {
   getQuizByCategorie: async (categorie: string) => {
     try {
       const ref = database.ref(`quizes/`).orderByChild("categorie").equalTo(categorie);
-      const quiz = (await ref.once("value")).val();
-      if (quiz) return quiz;
+      const resp = (await ref.once("value")).val();
+      if (resp) return resp;
       else return {};
     } catch (error) {
       console.log(error);
@@ -88,8 +88,8 @@ export const API = {
   getUserById: async (userUID: string) => {
     try {
       const ref = database.ref(`users/${userUID}`);
-      const quiz = (await ref.once("value")).val();
-      if (quiz) return quiz;
+      const user = (await ref.once("value")).val();
+      if (user) return user;
       else return {};
     } catch (error) {
       console.log(error);

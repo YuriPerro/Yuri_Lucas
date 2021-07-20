@@ -10,6 +10,7 @@ import Quiz from "./pages/Quiz";
 import Dashboard from "./pages/Dashboard";
 import CreateQuiz from "./pages/CreateQuiz";
 import LoadingView from "./components/LoadingView";
+import Profile from "./pages/Profile";
 
 function Routes() {
   const { isLoading } = useStore();
@@ -19,6 +20,7 @@ function Routes() {
       <LoadingView isLoading={isLoading} />
       <Switch>
         <Route path="/home" component={Home} />
+        <Route path="/profile" component={Profile} />
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/create-quiz" component={CreateQuiz} />
         <Route path="/quiz/:index">{(params) => <Quiz quizIndex={params.index} />}</Route>
