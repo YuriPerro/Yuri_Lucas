@@ -21,7 +21,7 @@ function Home() {
         <div className="flex gap-4 items-center">
           <span>
             Bem vindo
-            <span className="font-semibold"> {user.name}!</span>
+            <span className="font-semibold"> {user?.name}!</span>
           </span>
           <Button color="green" onClick={() => setLocation("/profile")}>
             <UserIcon className="w-6" />
