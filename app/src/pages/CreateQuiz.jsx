@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { XCircleIcon, ClipboardListIcon, PlusIcon } from "@heroicons/react/outline";
 import { useStore } from "../store";
@@ -10,13 +10,14 @@ import Input from "../components/Input";
 import Select from "../components/Select";
 import Label from "../components/Label";
 
-const makeEmptyQuizForm = () => ({ title: "", description: "", difficulty: 1 });
+const makeEmptyQuizForm = () => ({ title: "", description: "", difficulty: 1, categorie: "" });
 const makeEmptyQuestion = () => ({ title: "", options: ["", "", "", ""], answerIndex: 0 });
 const makeEmptyQuestionForm = () => [makeEmptyQuestion()];
 
 const CreateQuiz = () => {
   const { user, setLoading } = useStore();
   const [, setLocation] = useLocation();
+  const [categories, setCategories] = useState([]);
   const [quizForm, setQuizForm] = useState(makeEmptyQuizForm());
   const [questionsForm, setQuestionsForm] = useState(makeEmptyQuestionForm());
 
@@ -65,6 +66,10 @@ const CreateQuiz = () => {
       setLoading(true);
       const createdBy = user?.name || "SEM_USUARIO";
       const newQuiz = { ...quizForm, createdBy, questions: [...questionsForm] };
+      if (!newQuiz.questions.length) {
+        setLoading(false);
+        throw new Error("Quiz precisa ter pelo menos uma pergunta");
+      }
       await API.addQuiz(newQuiz);
       clearAllForm();
     } catch (error) {
@@ -74,8 +79,18 @@ const CreateQuiz = () => {
     }
   }
 
+  useEffect(() => {
+    API.getAllCategories().then((data) => {
+      const dataCategories = Object.values(data).map((categorie) => ({
+        ...categorie,
+        text: categorie.name,
+      }));
+      setCategories(dataCategories);
+    });
+  }, []);
+
   return (
-    <div className="flex flex-col w-full max-w-7xl min-h-screen p-8 bg-gradient-to-b from-purple-600 to-purple-500">
+    <div className="flex flex-col w-full max-w-7xl min-h-screen p-8 bg-gradient-to-b from-gray-400 to-gray-400">
       <header className="flex flex-col gap-2 sm:flex-row justify-center sm:justify-between items-center mb-14">
         <h1 className="text-4xl font-bold flex items-center gap-4 sm:mb-0">
           <img src={logo} alt="logo" className="w-16" /> Gerenciar
@@ -90,43 +105,63 @@ const CreateQuiz = () => {
       </header>
 
       <form onSubmit={handleSubmit} className="flex-1 w-full">
-        <section className="flex mb-10 flex-col sm:flex-row sm:gap-4  rounded-md p-4 bg-purple-800">
-          <div className="flex-1 flex flex-col">
-            <Label htmlFor="titleQuiz">Titulo do Quiz</Label>
-            <Input
-              id="titleQuiz"
-              name="title"
-              required
-              value={quizForm.title}
-              onChange={handleQuizFormChange}
-            />
+        <section className="flex mb-10 flex-col sm:gap-4 rounded-md p-4 bg-gray-500">
+          <div className="flex sm:flex-row flex-col flex-1 sm:gap-4">
+            <div className="flex-1 flex flex-col">
+              <Label htmlFor="titleQuiz">Titulo do Quiz</Label>
+              <Input
+                id="titleQuiz"
+                name="title"
+                required
+                value={quizForm.title}
+                onChange={handleQuizFormChange}
+              />
+            </div>
+
+            <div className="w-96 flex flex-col">
+              <Label htmlFor="categorie" className="mb-2 font-semibold">
+                Categoria
+              </Label>
+              <Select
+                id="categorie"
+                name="categorie"
+                required
+                options={categories}
+                value={quizForm.categorie}
+                onChange={handleQuizFormChange}
+              />
+            </div>
           </div>
-          <div className="flex-1 flex flex-col">
-            <Label htmlFor="description">Descrição</Label>
-            <Input
-              id="description"
-              name="description"
-              required
-              value={quizForm.description}
-              onChange={handleQuizFormChange}
-            />
-          </div>
-          <div className="w-36 flex flex-col">
-            <Label htmlFor="difficulty" className="mb-2 font-semibold">
-              Dificuldade
-            </Label>
-            <Select
-              id="difficulty"
-              name="difficulty"
-              required
-              options={[
-                { text: "Fácil", value: 1 },
-                { text: "Médio", value: 2 },
-                { text: "Difícil", value: 3 },
-              ]}
-              value={quizForm.difficulty}
-              onChange={handleQuizFormChange}
-            />
+
+          <div className="flex sm:flex-row flex-col flex-1 sm:gap-4">
+            <div className="flex-1 flex flex-col">
+              <Label htmlFor="description">Descrição</Label>
+              <Input
+                id="description"
+                name="description"
+                required
+                value={quizForm.description}
+                onChange={handleQuizFormChange}
+              />
+            </div>
+
+            <div className="w-52 flex flex-col">
+              <Label htmlFor="difficulty" className="mb-2 font-semibold">
+                Dificuldade
+              </Label>
+              <Select
+                id="difficulty"
+                name="difficulty"
+                required
+                options={[
+                  { text: "Fácil", value: 1 },
+                  { text: "Médio", value: 2 },
+                  { text: "Difícil", value: 3 },
+                ]}
+                value={quizForm.difficulty}
+                onChange={handleQuizFormChange}
+              />
+            </div>
           </div>
         </section>
 
@@ -134,7 +169,7 @@ const CreateQuiz = () => {
           {questionsForm.map((question, indexQuestion) => (
             <div
               key={"question" + indexQuestion}
-              className="flex flex-col relative bg-purple-800 shadow-lg rounded-md p-6">
+              className="flex flex-col relative bg-gray-500 shadow-lg rounded-md p-6">
               <button
                 type="button"
                 tabIndex="-1"
@@ -201,7 +236,7 @@ const CreateQuiz = () => {
           <button
             type="button"
             tabIndex="-1"
-            className="bg-purple-800 shadow-lg rounded-md p-6 focus:outline-none"
+            className="bg-gray-500 shadow-lg rounded-md p-6 focus:outline-none"
             onClick={addNewQuestion}>
             <div className="border-4 p-8 rounded-md border-dotted w-full h-full flex flex-col items-center justify-center">
               <span className="text-2xl">Adicionar nova pergunta</span>
@@ -209,7 +244,8 @@ const CreateQuiz = () => {
             </div>
           </button>
         </section>
-        <div className="flex gap-4">
+
+        <div className="flex gap-8">
           <Button type="button" color="gray" width="full" onClick={clearAllForm}>
             Limpar todos campos
           </Button>
