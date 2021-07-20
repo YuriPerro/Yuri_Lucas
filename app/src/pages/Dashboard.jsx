@@ -25,7 +25,11 @@ const Dashboard = () => {
           <img src={logo} alt="logo" className="w-16" /> Gerenciar
         </h1>
 
-        <div className="flex gap-4">
+        <div className="flex gap-4 items-center">
+          <span>
+            Bem vindo
+            <span className="font-semibold"> {user.name}!</span>
+          </span>
           <Button color="green" onClick={() => setLocation("/create-quiz")}>
             <ClipboardListIcon className="w-6" />
             Criar Quiz
