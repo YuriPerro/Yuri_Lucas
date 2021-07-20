@@ -15,9 +15,8 @@ const makeEmptyQuestion = () => ({ title: "", options: ["", "", "", ""], answerI
 const makeEmptyQuestionForm = () => [makeEmptyQuestion()];
 
 const CreateQuiz = () => {
-  const { user, setLoading } = useStore();
+  const { user, setLoading, categories } = useStore();
   const [, setLocation] = useLocation();
-  const [categories, setCategories] = useState([]);
   const [quizForm, setQuizForm] = useState(makeEmptyQuizForm());
   const [questionsForm, setQuestionsForm] = useState(makeEmptyQuestionForm());
 
@@ -79,16 +78,6 @@ const CreateQuiz = () => {
     }
   }
 
-  useEffect(() => {
-    API.getAllCategories().then((data) => {
-      const dataCategories = Object.values(data).map((categorie) => ({
-        ...categorie,
-        text: categorie.name,
-      }));
-      setCategories(dataCategories);
-    });
-  }, []);
-
   return (
     <div className="flex flex-col w-full max-w-7xl min-h-screen p-8 bg-gradient-to-b from-gray-400 to-gray-400">
       <header className="flex flex-col gap-2 sm:flex-row justify-center sm:justify-between items-center mb-14">
@@ -126,7 +115,10 @@ const CreateQuiz = () => {
                 id="categorie"
                 name="categorie"
                 required
-                options={categories}
+                options={categories.map((categorie) => ({
+                  ...categorie,
+                  text: categorie.name,
+                }))}
                 value={quizForm.categorie}
                 onChange={handleQuizFormChange}
               />

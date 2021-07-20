@@ -59,70 +59,58 @@ function Quiz(props) {
     return selectedOptionStatus ? "to-green-500" : "to-red-500";
   }, [showAnswer, selectedOptionStatus]);
 
-  if (!quizzes.length)
-    return (
-      <div className="flex flex-col justify-center h-screen">
-        <h2 className="text-lg">
-          Ops! Nenhum quiz encontrado... Retorne para o{" "}
-          <Link to="/home" className="underline">
-            início.
-          </Link>
-        </h2>
-      </div>
-    );
-  else
-    return (
-      <div
-        className={`min-h-screen w-full transition-all flex flex-col items-center p-8 bg-gradient-to-b from-gray-500 ${backgroundFeedback}`}>
-        <header className="flex justify-between mb-14">
-          <h1 className="text-4xl font-bold">Quiz - {quiz.title}</h1>
-        </header>
+  return (
+    <div
+      className={`min-h-screen w-full transition-all flex flex-col items-center p-8 bg-gradient-to-b from-gray-500 ${backgroundFeedback}`}>
+      <header className="flex justify-between mb-14">
+        <h1 className="text-4xl font-bold">Quiz - {quiz.title}</h1>
+      </header>
 
-        <main className="flex flex-col w-full items-center">
-          {showFinalResult ? (
-            <QuizResultView
-              totalQuestions={quiz.questions.length}
-              rightAnswers={rightAnswersCount}
-              startAnotherAttempt={startAnotherAttempt}
-              attempts={attempts}
-            />
-          ) : (
-            <>
-              <h2 className="text-2xl w-full text-center mb-5 text-gray-200 font-bold">
-                <span className="block mb-4 uppercase font-normal tracking-wider">
-                  Pergunta ({currentQuestionIndex + 1}/{quiz.questions.length})
+      <main className="flex flex-col w-full items-center">
+        {showFinalResult ? (
+          <QuizResultView
+            totalQuestions={quiz.questions.length}
+            rightAnswers={rightAnswersCount}
+            startAnotherAttempt={startAnotherAttempt}
+            attempts={attempts}
+          />
+        ) : (
+          <>
+            <h2 className="text-2xl w-full text-center mb-5 text-gray-200 font-bold">
+              <span className="block mb-4 uppercase font-normal tracking-wider">
+                Pergunta ({currentQuestionIndex + 1}/{quiz.questions.length})
+              </span>
+              {quiz.questions[currentQuestionIndex].title}
+            </h2>
+
+            <ul className="flex flex-col justify-center mb-2 w-full max-w-lg">
+              {quiz.questions[currentQuestionIndex].options.map((option, i) => (
+                <QuizOption
+                  key={i}
+                  option={option}
+                  status={getOptionStatus(i)}
+                  isSelecting={!showAnswer}
+                  onClick={() => selectOption(i)}
+                />
+              ))}
+            </ul>
+
+            {showAnswer && (
+              <div className="w-full max-w-lg flex flex-col text-2xl  text-center text-white ">
+                <span className="rounded-lg mb-8">
+                  {selectedOptionStatus ? "Resposta certa !" : " Resposta errada !"}
                 </span>
-                {quiz.questions[currentQuestionIndex].title}
-              </h2>
-
-              <ul className="flex flex-col justify-center mb-2 w-full max-w-lg">
-                {quiz.questions[currentQuestionIndex].options.map((option, i) => (
-                  <QuizOption
-                    key={i}
-                    option={option}
-                    status={getOptionStatus(i)}
-                    isSelecting={!showAnswer}
-                    onClick={() => selectOption(i)}
-                  />
-                ))}
-              </ul>
-
-              {showAnswer && (
-                <div className="w-full max-w-lg flex flex-col text-2xl  text-center text-white ">
-                  <span className="rounded-lg mb-8">
-                    {selectedOptionStatus ? "Resposta certa !" : " Resposta errada !"}
-                  </span>
-                  <Button width="full" color="blue" onClick={nextQuestion} className="mt-auto">
-                    Próxima
-                    <ArrowRightIcon className="w-6" />
-                  </Button>
-                </div>
-              )}
-            </>
-          )}
-        </main>
-      </div>
-    );
+                <Button width="full" color="blue" onClick={nextQuestion} className="mt-auto">
+                  Próxima
+                  <ArrowRightIcon className="w-6" />
+                </Button>
+              </div>
+            )}
+          </>
+        )}
+      </main>
+    </div>
+  );
 }
 
 export default Quiz;
