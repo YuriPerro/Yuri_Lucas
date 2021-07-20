@@ -41,13 +41,8 @@ const Dashboard = () => {
         <section className="mb-6">
           <h2 className="text-2xl font-bold mb-4">Seus quizzes</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 ">
-            {quizzesFiltered.map((quiz, i) => (
-              <Card
-                key={i}
-                onClick={() => setLocation(`/quiz/${i}`)}
-                title={quiz.title}
-                description={quiz.description}
-              />
+            {quizzesFiltered.map((quiz) => (
+              <Card key={quiz.id} title={quiz.title} description={quiz.description} />
             ))}
           </div>
         </section>
