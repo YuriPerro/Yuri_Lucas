@@ -13,8 +13,9 @@ import LoadingView from "./components/LoadingView";
 import Profile from "./pages/Profile";
 
 function Routes() {
-  const { isLoading } = useStore();
+  const { isLoading, isFetching } = useStore();
 
+  if (isFetching) return <LoadingView isLoading={true} />;
   return (
     <Router>
       <LoadingView isLoading={isLoading} />

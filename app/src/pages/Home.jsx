@@ -1,31 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useLocation } from "wouter";
 
 import { LoginIcon, UserIcon } from "@heroicons/react/outline";
 import Button from "../components/Button";
 import logo from "../assets/images/logo-quizzer.png";
 import { ListQuizzes } from "../components/ListQuizzes";
-import { API } from "../api/services";
 import { useStore } from "../store";
 
 function Home() {
   const [, setLocation] = useLocation();
-  const [categories, setCategories] = useState([]);
-  const { setLoading, setQuizzes } = useStore();
-
-  useEffect(() => {
-    async function fetchData() {
-      setLoading(true);
-      const dataCategories = await API.getAllCategories();
-      const dataQuizzes = await API.getAllQuizes();
-
-      if (dataCategories) setCategories(Object.values(dataCategories));
-      if (dataQuizzes) setQuizzes(Object.values(dataQuizzes));
-      setLoading(false);
-    }
-
-    fetchData();
-  }, []);
+  const { categories } = useStore();
 
   return (
     <div className="flex flex-col min-h-screen w-full p-8 bg-gradient-to-b from-purple-600 to-purple-500">
