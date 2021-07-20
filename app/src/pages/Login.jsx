@@ -33,9 +33,10 @@ function Login() {
         const isAdmin = userType === "prof" ? true : false;
 
         if (isAdmin && userDB.usertype === PROFESSOR) {
-          setUser({ email, isAdmin, name: userDB.name });
+          setUser({ isAdmin, ...userDB });
           setLocation("/dashboard");
         } else if (!isAdmin && userDB.usertype === ALUNO) {
+          setUser({ isAdmin, ...userDB });
           setLocation("/home");
         } else {
           await API.auth.signOut();
