@@ -9,6 +9,7 @@ import ProgressBar from "../components/ProgressBar";
 import medal_one from "../assets/images/medal-first.png";
 import medal_second from "../assets/images/medal-second.png";
 import medal_star from "../assets/images/medal-star.png";
+import avatar from "../assets/images/avatar.jpg";
 
 const Profile = () => {
   const [, setLocation] = useLocation();
@@ -34,9 +35,9 @@ const Profile = () => {
       <main className="flex flex-col grid-cols-1 items-center">
         <div className="flex flex-col items-center">
           <div className="bg-yellow-500 w-32 h-32 rounded-full items-center flex justify-center shadow-xl">
-            <img src={"https://github.com/YuriPerro.png"} className="w-28 rounded-full" />
+            <img src={avatar} className="w-28 rounded-full" />
           </div>
-          <h1 className="text-2xl font-semibold mt-2"></h1>
+          <h1 className="text-2xl font-semibold mt-2">Bart Simpson</h1>
         </div>
 
         <div className="flex flex-row items-center mt-10 w-100 justify-around">
@@ -57,7 +58,7 @@ const Profile = () => {
         <ProgressBar />
 
         <div className="flex flex-col items-center mt-5 w-72">
-          <h1 className="text-2xl mt-2">Quizes realizados: 5</h1>
+          <h1 className="text-2xl mt-2">Quizzes realizados: 5</h1>
         </div>
       </main>
     </div>
