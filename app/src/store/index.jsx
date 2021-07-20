@@ -5,6 +5,7 @@ const StoreContext = createContext();
 export function StoreProvider({ children }) {
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState(null);
+  const [quizzes, setQuizzes] = useState([]);
 
   function setLoading(value) {
     if (value) setIsLoading(value);
@@ -18,6 +19,8 @@ export function StoreProvider({ children }) {
         setUser,
         isLoading,
         setLoading,
+        quizzes,
+        setQuizzes,
       }}>
       {children}
     </StoreContext.Provider>
