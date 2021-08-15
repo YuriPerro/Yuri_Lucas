@@ -11,6 +11,7 @@ export function StoreProvider({ children }) {
   const [quizzes, setQuizzes] = useState([]);
   const [categories, setCategories] = useState([]);
   const [students, setStudents] = useState([]);
+  const [didLevelUp, setDidLevelUp] = useState(false);
 
   function setLoading(value) {
     if (value) setIsLoading(value);
@@ -32,6 +33,7 @@ export function StoreProvider({ children }) {
     const xpToLevelUp = getXpToLevelUp(newUserState.level);
     if (newUserState.xp >= xpToLevelUp) {
       console.log("New up");
+      setDidLevelUp(true);
       newUserState.level++;
       newUserState.xp = newUserState.xp - xpToLevelUp;
     }
@@ -89,6 +91,8 @@ export function StoreProvider({ children }) {
         categories,
         students,
         setQuizzes,
+        didLevelUp,
+        setDidLevelUp,
       }}>
       {children}
     </StoreContext.Provider>

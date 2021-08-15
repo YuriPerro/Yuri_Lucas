@@ -7,9 +7,9 @@ import PieChart from "../components/PieChart";
 import ProgressBar from "./ProgressBar";
 
 function QuizResultView(props) {
-  const { quiz, rightAnswers, startAnotherAttempt, attempts } = props;
-  const [, setLocation] = useLocation();
+  const { quiz, rightAnswers } = props;
 
+  const [, setLocation] = useLocation();
   const totalQuestions = quiz.questions.length;
   const hitsInDecimalPercentage = rightAnswers / totalQuestions;
   const xpObtained = (getQuizXp(quiz) * hitsInDecimalPercentage).toFixed();
@@ -32,17 +32,12 @@ function QuizResultView(props) {
       </div>
 
       <div className="w-full max-w-lg text-center text-white text-xl">
-        <p>Obteve {xpObtained} de experiencia!</p>
+        <p>Obteve {xpObtained} de experiência!</p>
 
         <div className="flex justify-center mb-4">
           <ProgressBar />
         </div>
 
-        {false && (
-          <Button width="full" color="gray" className="mb-4" onClick={startAnotherAttempt}>
-            Tentar novamente
-          </Button>
-        )}
         <Button width="full" color="green" onClick={() => setLocation("/home")}>
           Escolher outro quiz
         </Button>
