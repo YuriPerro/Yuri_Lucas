@@ -38,7 +38,7 @@ function QuizResultView(props) {
           <ProgressBar />
         </div>
 
-        {attempts < 2 && (
+        {false && (
           <Button width="full" color="gray" className="mb-4" onClick={startAnotherAttempt}>
             Tentar novamente
           </Button>
