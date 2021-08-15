@@ -65,7 +65,6 @@ const Dashboard = () => {
           <div className="grid grid-cols-1  sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 ">
             {quizzesFiltered.map((quiz) => (
               <div key={quiz.id} className="relative flex w-full h-full">
-                <span>{quiz.id}</span>
                 <button
                   type="button"
                   tabIndex="-1"
