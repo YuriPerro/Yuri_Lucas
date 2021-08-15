@@ -15,6 +15,13 @@ const Profile = () => {
   const [, setLocation] = useLocation();
   const { user } = useStore();
 
+  const getAcomplishedQuizzes = () => {
+    const acomplishedQuizzes = user.acomplishedQuizzes;
+    if (acomplishedQuizzes) {
+      return acomplishedQuizzes.length;
+    } else return 0;
+  };
+
   return (
     <div className="flex flex-col min-h-screen w-full p-8 bg-gradient-to-b from-purple-600 to-purple-800">
       <header className="flex flex-col gap-2 sm:flex-row justify-center sm:justify-between items-center mb-14">
@@ -63,7 +70,7 @@ const Profile = () => {
         <ProgressBar />
 
         <div className="flex flex-col items-center mt-5 w-72">
-          <h1 className="text-2xl mt-2">Quizzes realizados: 5</h1>
+          <h1 className="text-2xl mt-2">Quizzes realizados: {getAcomplishedQuizzes()}</h1>
         </div>
       </main>
     </div>

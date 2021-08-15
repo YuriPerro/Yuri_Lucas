@@ -1,14 +1,11 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { useLocation } from "wouter";
 import { useStore } from "../store";
 import Card from "./Card";
-import Modal from "./Modal";
 
 export const ListQuizzes = ({ categorie }) => {
   const [, setLocation] = useLocation();
   const { quizzes, user } = useStore();
-
-  const [quizAcomplished, setQuizAcomplished] = useState(false);
 
   const quizzesFiltered = useMemo(() => {
     return quizzes.filter((quiz) => quiz.categorie === categorie);
