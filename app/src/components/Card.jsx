@@ -1,7 +1,7 @@
 import React from "react";
 
 function Card(props) {
-  const { title, description, footer, difficulty, ...rest } = props;
+  const { title, description, footer, difficulty, hoverEffect, ...rest } = props;
 
   const getColorByDiff = () => {
     switch (difficulty) {
@@ -28,12 +28,14 @@ function Card(props) {
     }
   };
 
+  const hoverClasses = hoverEffect ? "hover:scale-105 cursor-pointer" : "";
+
   return (
     <div
       {...rest}
       className={`flex flex-col flex-1 border-b-8 border-${
         getColorByDiff()?.color
-      } bg-gray-100 shadow-lg rounded-md p-4 w-full text-black transition-all transform hover:scale-105 cursor-pointer`}>
+      } bg-gray-100 shadow-lg rounded-md p-4 w-full text-black transition-all transform ${hoverClasses}`}>
       <div className="flex flex-row ">
         <span className="text-xl mb-4 font-bold text-gray-700">{title}</span>
         <div
