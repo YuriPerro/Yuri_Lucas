@@ -52,7 +52,7 @@ export function StoreProvider({ children }) {
   function fetchUser() {
     return API.auth.onAuthStateChanged((user) => {
       if (user) {
-        API.singleUserRef(user.uid).once("value", (data) => {
+        API.singleUserRef(user.uid).on("value", (data) => {
           const userDB = data.val();
 
           if (userDB) {
