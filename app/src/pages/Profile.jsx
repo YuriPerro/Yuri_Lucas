@@ -8,9 +8,11 @@ import medal_one from "../assets/images/medal-first.png";
 import medal_second from "../assets/images/medal-second.png";
 import medal_star from "../assets/images/medal-star.png";
 import avatar from "../assets/images/avatar.jpg";
+import { useStore } from "../store";
 
 const Profile = () => {
   const [, setLocation] = useLocation();
+  const { user } = useStore();
 
   return (
     <div className="flex flex-col min-h-screen w-full p-8 bg-gradient-to-b from-purple-600 to-purple-800">
@@ -35,7 +37,7 @@ const Profile = () => {
           <div className="bg-yellow-500 w-32 h-32 rounded-full items-center flex justify-center shadow-xl">
             <img src={avatar} className="w-28 rounded-full" />
           </div>
-          <h1 className="text-2xl font-semibold mt-2">Bart Simpson</h1>
+          <h1 className="text-2xl font-semibold mt-2">{user.name}</h1>
         </div>
 
         <div className="flex flex-row items-center mt-10 w-100 justify-around">
