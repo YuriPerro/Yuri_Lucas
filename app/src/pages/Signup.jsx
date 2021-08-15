@@ -42,6 +42,8 @@ function Login() {
             registration: form.registration,
             uid: res.user.uid,
             usertype: form.type === "aluno" ? "aluno" : "professor",
+            xp: 0,
+            level: 1,
           };
 
           await API.database.ref("users/" + res.user.uid).update(user);
