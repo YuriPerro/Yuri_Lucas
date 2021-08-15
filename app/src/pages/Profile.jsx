@@ -1,6 +1,7 @@
 import React from "react";
 import Button from "../components/Button";
-import { LoginIcon, UserIcon, ArrowLeftIcon } from "@heroicons/react/outline";
+import { LoginIcon, ArrowLeftIcon } from "@heroicons/react/outline";
+import { UserGroupIcon } from "@heroicons/react/solid";
 import { useLocation } from "wouter";
 
 import ProgressBar from "../components/ProgressBar";
@@ -25,6 +26,10 @@ const Profile = () => {
         </div>
 
         <div className="flex gap-4">
+          <Button color="green" onClick={() => setLocation("/find-friends")}>
+            <UserGroupIcon className="w-6" />
+            Encontrar Amigos
+          </Button>
           <Button color="red" onClick={() => setLocation("/login")}>
             <LoginIcon className="w-6" />
             Sair

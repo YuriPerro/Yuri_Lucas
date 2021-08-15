@@ -11,6 +11,7 @@ import Dashboard from "./pages/Dashboard";
 import CreateQuiz from "./pages/CreateQuiz";
 import LoadingView from "./components/LoadingView";
 import Profile from "./pages/Profile";
+import FindFriends from "./pages/FindFriends";
 
 function Routes() {
   const { isLoading, isFetching } = useStore();
@@ -28,30 +29,11 @@ function Routes() {
         <Route path="/" component={Intro} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
+        <Route path="/find-friends" component={FindFriends} />
         <Redirect to="/" />
       </Switch>
     </Router>
   );
 }
-
-// Adicionar rotas privadas
-/*
-{
-  !!user ? (
-    <>
-      <Route path="/home" component={Home} />
-      <Route path="/dashboard" component={Dashboard} />
-      <Route path="/create-quiz" component={CreateQuiz} />
-      <Route path="/quiz/:index">{(params) => <Quiz quizIndex={params.index} />}</Route>
-    </>
-  ) : (
-    <>
-      <Route path="/" component={Intro} />
-      <Route path="/login" component={Login} />
-      <Route path="/signup" component={Signup} />
-    </>
-  );
-}
-*/
 
 export default Routes;
