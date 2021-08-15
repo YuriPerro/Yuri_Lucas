@@ -10,6 +10,10 @@ a {
   @apply text-purple-100 hover:underline;
 }
 
+.animate-fade-in {
+  animation: fadeIn 1s ease;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
