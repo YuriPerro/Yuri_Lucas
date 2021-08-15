@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useLocation } from "wouter";
 
 import { LoginIcon, ClipboardListIcon, XCircleIcon } from "@heroicons/react/outline";
@@ -6,14 +6,20 @@ import Card from "../components/Card";
 import Button from "../components/Button";
 import logo from "../assets/images/logo-quizzer.png";
 import { useStore } from "../store";
+import { API } from "../api/services";
 
 const Dashboard = () => {
   const [, setLocation] = useLocation();
-  const { quizzes, user } = useStore();
+  const { quizzes, user, fetchInitialData } = useStore();
 
-  function handleDeleteQuiz(quizId) {
+  async function handleDeleteQuiz(quizId) {
     console.log(quizId);
     //firebase
+    try {
+      await API.removeQuiz(quizId);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   const quizzesFiltered = useMemo(() => {
@@ -61,12 +67,7 @@ const Dashboard = () => {
                   <XCircleIcon className="w-9" />
                 </button>
 
-                <Card
-                  title={quiz.title}
-                  difficulty={quiz.difficulty}
-                  description={quiz.description}
-                  hoverEffect={false}
-                />
+                <Card title={quiz.title} quiz={quiz} hoverEffect={false} />
               </div>
             ))}
           </div>

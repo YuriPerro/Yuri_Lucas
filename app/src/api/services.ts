@@ -44,6 +44,17 @@ export const API = {
     }
   },
 
+  removeQuiz: async (quizId: string) => {
+    try {
+      const resp = await database.ref("quizes/" + quizId).remove();
+
+      if (resp) return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  },
+
   updateUserXpLevel: async (xp: number, level: number, uid: string) => {
     try {
       const resp = await database.ref("users/" + uid).update({
