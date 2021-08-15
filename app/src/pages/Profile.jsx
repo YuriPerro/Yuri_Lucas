@@ -2,10 +2,8 @@ import React from "react";
 import Button from "../components/Button";
 import { LoginIcon, UserIcon, ArrowLeftIcon } from "@heroicons/react/outline";
 import { useLocation } from "wouter";
-import { useStore } from "../store";
 
 import ProgressBar from "../components/ProgressBar";
-
 import medal_one from "../assets/images/medal-first.png";
 import medal_second from "../assets/images/medal-second.png";
 import medal_star from "../assets/images/medal-star.png";

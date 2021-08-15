@@ -27,6 +27,20 @@ export function StoreProvider({ children }) {
     setTimeout(() => setIsisFetching(false), 200);
   }
 
+  function addUserXp(newXp) {
+    if (!user) return;
+
+    const newUserState = { ...user };
+    const xpToLevelUp = newUserState.level * 500;
+    newUserState.xp = newUserState.xp + newXp;
+    if (newUserState.xp >= xpToLevelUp) {
+      console.log("New up");
+      newUserState.level++;
+      newUserState.xp = newUserState.xp - xpToLevelUp;
+    }
+    setUser(newUserState);
+  }
+
   useEffect(() => fetchInitialData(), []);
 
   return (
@@ -34,6 +48,7 @@ export function StoreProvider({ children }) {
       value={{
         user,
         setUser,
+        addUserXp,
         isFetching,
         isLoading,
         setLoading,

@@ -34,3 +34,16 @@ a {
     transform: translate(-50%, -50%) rotate(360deg);
   }
 }
+
+.animate-grown-width {
+  animation: grownWidth 3s ease forwards;
+}
+
+@keyframes grownWidth {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}

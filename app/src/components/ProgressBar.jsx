@@ -1,22 +1,32 @@
-import React from "react";
+import React, { useMemo } from "react";
+import { useStore } from "../store";
 
 function ProgressBar() {
+  const { user } = useStore();
+
+  const levelPercentage = useMemo(() => {
+    const xpToLevelUp = user.level * 500;
+    return ((user.xp * 100) / xpToLevelUp).toFixed(1);
+  }, [user]);
+
   return (
     <div className="relative pt-1 w-120 mt-5">
       <div className="flex mb-2 items-center justify-between">
         <div>
-          <span className="text-xs font-bold inline-block py-1 px-2 uppercase rounded-full text-green-600 bg-green-200">
-            Nível atual 7
+          <span className="text-xs font-bold inline-block py-1 px-2 uppercase rounded-full text-green-700 bg-green-200">
+            Nível atual {user.level}
           </span>
         </div>
         <div className="text-right">
-          <span className="text-sm font-body inline-block text-white-600">30% completo</span>
+          <span className="text-sm font-body inline-block text-white-600">
+            {levelPercentage}% completo
+          </span>
         </div>
       </div>
-      <div className="overflow-hidden h-2 mb-4 text-xs flex rounded bg-green-200">
+      <div className="overflow-hidden h-4 mb-4 text-xs flex rounded bg-green-200 border-2 border-green-200">
         <div
-          style={{ width: "30%" }}
-          className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-500"></div>
+          style={{ maxWidth: `${levelPercentage}%` }}
+          className="animate-grown-width shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-500"></div>
       </div>
     </div>
   );

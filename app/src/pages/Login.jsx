@@ -31,7 +31,6 @@ function Login() {
       if (resp) {
         const userDB = await API.getUserById(resp.user.uid);
         const isAdmin = userType === "prof" ? true : false;
-
         if (isAdmin && userDB.usertype === PROFESSOR) {
           setUser({ isAdmin, ...userDB });
           setLocation("/dashboard");
@@ -68,12 +67,12 @@ function Login() {
             <label htmlFor="email" className="mb-2 font-semibold">
               Email
             </label>
-            <Input type="email" id="email" required />
+            <Input type="email" id="email" required defaultValue="aluno@teste.com" />
 
             <label htmlFor="password" className="mb-2 font-semibold">
               Senha
             </label>
-            <Input type="password" id="password" minLength={4} required />
+            <Input type="password" id="password" minLength={4} required defaultValue="123456" />
 
             <label htmlFor="type" className="mb-2 font-semibold">
               Tipo de usuário
