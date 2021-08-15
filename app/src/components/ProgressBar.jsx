@@ -1,11 +1,12 @@
 import React, { useMemo } from "react";
 import { useStore } from "../store";
+import { getXpToLevelUp } from "../shared";
 
 function ProgressBar() {
   const { user } = useStore();
 
-  const levelPercentage = useMemo(() => {
-    const xpToLevelUp = user.level * 500;
+  const levelPercentageCompleted = useMemo(() => {
+    const xpToLevelUp = getXpToLevelUp(user.level);
     return ((user.xp * 100) / xpToLevelUp).toFixed(1);
   }, [user]);
 
@@ -19,13 +20,13 @@ function ProgressBar() {
         </div>
         <div className="text-right">
           <span className="text-sm font-body inline-block text-white-600">
-            {levelPercentage}% completo
+            {levelPercentageCompleted}% completo
           </span>
         </div>
       </div>
       <div className="overflow-hidden h-4 mb-4 text-xs flex rounded bg-green-200 border-2 border-green-200">
         <div
-          style={{ maxWidth: `${levelPercentage}%` }}
+          style={{ maxWidth: `${levelPercentageCompleted}%` }}
           className="animate-grown-width shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-500"></div>
       </div>
     </div>

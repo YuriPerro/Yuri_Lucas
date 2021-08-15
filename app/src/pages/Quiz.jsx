@@ -5,10 +5,9 @@ import QuizResultView from "../components/QuizResultView";
 import { Link } from "wouter";
 import { ArrowRightIcon } from "@heroicons/react/outline";
 import { useStore } from "../store";
-import { quizDifficultyXp } from "../@constants";
 
 function Quiz(props) {
-  const { quizzes, addUserXp } = useStore();
+  const { quizzes, addToUserXp } = useStore();
   const quiz = quizzes.find((quiz) => quiz.id === props.quizId);
 
   const [attempts, setAttempts] = useState(1);
@@ -38,7 +37,7 @@ function Quiz(props) {
     } else {
       setShowFinalResult(true);
       setShowAnswer(false);
-      updateUserXp();
+      addToUserXp(quiz, rightAnswersCount);
     }
   }
 
@@ -54,13 +53,6 @@ function Quiz(props) {
     setCurrentQuestionIndex(0);
     setSelectedOptionsStatus(false);
     setRightAnswersCount(0);
-  }
-
-  function updateUserXp() {
-    const totalQuestions = quiz.questions.length;
-    const hitsInDecimalPercentage = rightAnswersCount / totalQuestions;
-    const xpObtained = (quizDifficultyXp[quiz.difficulty] * hitsInDecimalPercentage).toFixed(1);
-    addUserXp(Number(xpObtained));
   }
 
   const backgroundFeedback = useMemo(() => {
@@ -90,11 +82,10 @@ function Quiz(props) {
         <main className="flex flex-col w-full items-center">
           {showFinalResult ? (
             <QuizResultView
-              totalQuestions={quiz.questions.length}
+              quiz={quiz}
               rightAnswers={rightAnswersCount}
               startAnotherAttempt={startAnotherAttempt}
               attempts={attempts}
-              difficulty={quiz.difficulty}
             />
           ) : (
             <>

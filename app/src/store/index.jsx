@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
 import { API } from "../api/services";
+import { getQuizXp, getXpToLevelUp } from "../shared";
 
 const StoreContext = createContext();
 
@@ -15,12 +16,19 @@ export function StoreProvider({ children }) {
     else setTimeout(() => setIsLoading(value), 500);
   }
 
-  function addUserXp(newXp) {
-    if (!user) return;
+  function addToUserXp(quiz, rightAnswersCount) {
+    if (!user || !quiz) {
+      console.log("Não foi possivel addToUserXp!");
+      return;
+    }
+
+    const totalQuestions = quiz.questions.length;
+    const hitsInDecimalPercentage = rightAnswersCount / totalQuestions;
+    const xpObtained = Number((getQuizXp(quiz) * hitsInDecimalPercentage).toFixed(1));
 
     const newUserState = { ...user };
-    const xpToLevelUp = newUserState.level * 500;
-    newUserState.xp = newUserState.xp + newXp;
+    newUserState.xp = newUserState.xp + xpObtained;
+    const xpToLevelUp = getXpToLevelUp(newUserState.level);
     if (newUserState.xp >= xpToLevelUp) {
       console.log("New up");
       newUserState.level++;
@@ -66,7 +74,7 @@ export function StoreProvider({ children }) {
       value={{
         user,
         setUser,
-        addUserXp,
+        addToUserXp,
         isFetching,
         isLoading,
         setLoading,
