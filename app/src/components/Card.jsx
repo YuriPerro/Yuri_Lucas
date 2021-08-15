@@ -55,7 +55,7 @@ function Card(props) {
       </div>
 
       {isAcomplished && (
-        <div className="flex flex-row items-center w-full mt-2 mb-2 pl-2 pr-4 justify-between">
+        <div className="flex-1 flex flex-row items-end w-full mt-2 mb-2 pl-2 pr-4 justify-between">
           <div className="flex flex-row items-center">
             <BadgeCheckIcon className="w-6 mr-1 text-blue-700" />
             <span className="text-xs font-semibold text-blue-700">Quiz realizado</span>
