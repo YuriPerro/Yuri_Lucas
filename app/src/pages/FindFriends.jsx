@@ -22,7 +22,7 @@ const SearchStudent = () => {
     const filterResult = students.filter((student) => !(student.uid === user.uid));
 
     if (!search) return filterResult;
-    return students.filter((student) => {
+    return filterResult.filter((student) => {
       const nameNormalized = student.name.trim().toLocaleLowerCase();
       const searchNormalized = search.trim().toLocaleLowerCase();
       return nameNormalized.includes(searchNormalized);
