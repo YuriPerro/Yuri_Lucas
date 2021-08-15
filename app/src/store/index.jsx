@@ -49,8 +49,7 @@ export function StoreProvider({ children }) {
 
   async function fetchInitialData() {
     setIsisFetching(true);
-    const [dataQuizzes, dataCategories, dataStudents] = await Promise.all([
-      API.getAllQuizzes(),
+    const [dataCategories, dataStudents] = await Promise.all([
       API.getAllCategories(),
       API.getStudents(),
     ]);
@@ -82,9 +81,20 @@ export function StoreProvider({ children }) {
     });
   }
 
+  const getAllQuizzes = async () => {
+    return API.database.ref("quizes/").on("value", (data) => {
+      const dataQuizzes = data.val();
+
+      if (dataQuizzes) {
+        if (dataQuizzes) setQuizzes(Object.values(dataQuizzes));
+      }
+    });
+  };
+
   useEffect(() => {
     fetchUser();
     fetchInitialData();
+    getAllQuizzes();
   }, []);
 
   return (
@@ -103,6 +113,7 @@ export function StoreProvider({ children }) {
         setQuizzes,
         didLevelUp,
         setDidLevelUp,
+        fetchInitialData,
       }}>
       {children}
     </StoreContext.Provider>
