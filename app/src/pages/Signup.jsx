@@ -6,8 +6,13 @@ import Input from "../components/Input";
 import Select from "../components/Select";
 import Button from "../components/Button";
 import logo from "../assets/images/logo-quizzer.png";
+import { API } from "../api/services";
+import { useStore } from "../store";
+
+import { ErrorCode } from "../constants/codeErrorsFirebase";
 
 function Login() {
+  const { setLoading } = useStore();
   const [, setLocation] = useLocation();
   const [form, setForm] = useState({
     name: "",
@@ -22,10 +27,49 @@ function Login() {
     setForm((prev) => ({ ...prev, [name]: value }));
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    if (form.type === "aluno") setLocation("/home");
-    else setLocation("/dashboard");
+    setLoading(true);
+    API.auth
+      .createUserWithEmailAndPassword(form.email, form.password)
+      .then(async (res) => {
+        if (res) {
+          const user = {
+            email: form.email,
+            firstName: form.name,
+            lastName: form.name,
+            name: form.name,
+            registration: form.registration,
+            uid: res.user.uid,
+            usertype: form.type === "aluno" ? "aluno" : "professor",
+          };
+
+          await API.database.ref("users/" + res.user.uid).update(user);
+
+          setLoading(false);
+          if (form.type === "aluno") setLocation("/home");
+          else setLocation("/dashboard");
+          // await res.user.sendEmailVerification();
+          // OnAuthStageChanged is the next step
+        } else {
+          throw new Error();
+        }
+      })
+      .catch((error) => {
+        setLoading(false);
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        switch (errorCode) {
+          case ErrorCode.emailInUse:
+            return alert("Já existe uma conta criada com esse e-mail!");
+          case ErrorCode.emailInvalid:
+            return alert("E-mail informado não e válido");
+          case ErrorCode.lowPassword:
+            return alert("Senha muita fraca");
+          default:
+            return alert(errorMessage);
+        }
+      });
   }
 
   return (

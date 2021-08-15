@@ -21,6 +21,7 @@ const getCurrentDate = () => {
 export const API = {
   database: database,
   auth: auth,
+  singleUserRef: (uid: string) => database.ref("users/" + uid),
 
   addQuiz: async (quiz: QuizDataProps) => {
     try {
@@ -43,7 +44,7 @@ export const API = {
     }
   },
 
-  getAllQuizes: async () => {
+  getAllQuizzes: async () => {
     try {
       const ref = database.ref(`quizes/`);
       const resp = (await ref.once("value")).val();

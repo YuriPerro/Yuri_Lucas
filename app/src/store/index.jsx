@@ -15,18 +15,6 @@ export function StoreProvider({ children }) {
     else setTimeout(() => setIsLoading(value), 500);
   }
 
-  async function fetchInitialData() {
-    setIsisFetching(true);
-    const [dataQuizzes, dataCategories] = await Promise.all([
-      API.getAllQuizes(),
-      API.getAllCategories(),
-    ]);
-    if (dataCategories) setCategories(Object.values(dataCategories));
-    if (dataQuizzes) setQuizzes(Object.values(dataQuizzes));
-
-    setTimeout(() => setIsisFetching(false), 200);
-  }
-
   function addUserXp(newXp) {
     if (!user) return;
 
@@ -41,7 +29,37 @@ export function StoreProvider({ children }) {
     setUser(newUserState);
   }
 
-  useEffect(() => fetchInitialData(), []);
+  async function fetchInitialData() {
+    setIsisFetching(true);
+    const [dataQuizzes, dataCategories] = await Promise.all([
+      API.getAllQuizzes(),
+      API.getAllCategories(),
+    ]);
+    if (dataCategories) setCategories(Object.values(dataCategories));
+    if (dataQuizzes) setQuizzes(Object.values(dataQuizzes));
+
+    setTimeout(() => setIsisFetching(false), 200);
+  }
+
+  function fetchUser() {
+    return API.auth.onAuthStateChanged((user) => {
+      if (user) {
+        API.singleUserRef(user.uid).once("value", (data) => {
+          const userDB = data.val();
+
+          if (userDB) {
+            const isAdmin = userDB.isAdmin ? true : false;
+            setUser({ isAdmin, ...userDB });
+          }
+        });
+      }
+    });
+  }
+
+  useEffect(() => {
+    fetchUser();
+    fetchInitialData();
+  }, []);
 
   return (
     <StoreContext.Provider
