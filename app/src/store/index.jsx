@@ -36,7 +36,7 @@ export function StoreProvider({ children }) {
     }
 
     API.updateUserXpLevel(Number(newUserState.xp.toFixed(1)), newUserState.level, user.uid);
-    API.addAcomplishedQuiz(quiz.id, user.uid);
+    API.addAcomplishedQuiz(quiz.id, user.uid, rightAnswersCount, totalQuestions);
 
     setUser(newUserState);
   }

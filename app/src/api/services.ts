@@ -58,18 +58,28 @@ export const API = {
     }
   },
 
-  addAcomplishedQuiz: async (quizId: string, uid: string) => {
+  addAcomplishedQuiz: async (
+    quizId: string,
+    uid: string,
+    rightAnswersCount: number,
+    totalQuestions: number,
+  ) => {
     try {
       let acomplishedQuizzes = [];
+      const data = {
+        quizId: quizId,
+        rightAnswersCount: rightAnswersCount,
+        totalQuestions: totalQuestions,
+      };
       const ref = await database.ref("users/" + uid).once("value");
       const userDB = ref.val();
 
       if (userDB) {
         if (userDB.acomplishedQuizzes) {
           acomplishedQuizzes = userDB.acomplishedQuizzes;
-          acomplishedQuizzes.push(quizId);
+          acomplishedQuizzes.push(data);
         } else {
-          acomplishedQuizzes.push(quizId);
+          acomplishedQuizzes.push(data);
         }
       }
 

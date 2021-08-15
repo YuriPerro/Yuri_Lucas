@@ -16,7 +16,7 @@ export const ListQuizzes = ({ categorie }) => {
   const getQuizAcomplished = (quizId) => {
     const acomplisheds = user.acomplishedQuizzes;
     if (acomplisheds) {
-      const filtered = acomplisheds.filter((id) => id === quizId);
+      const filtered = acomplisheds.filter((obj) => obj.quizId === quizId);
       if (filtered.length > 0) {
         return true;
       } else {
