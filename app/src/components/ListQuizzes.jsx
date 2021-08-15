@@ -25,6 +25,21 @@ export const ListQuizzes = ({ categorie }) => {
     }
   };
 
+  const getTextDetails = (quizId) => {
+    const acomplished = getQuizAcomplished(quizId);
+    const acomplishedList = user.acomplishedQuizzes;
+
+    if (acomplished) {
+      const filtered = acomplishedList.filter((obj) => obj.quizId === quizId);
+      if (filtered.length > 0) {
+        const countRightAnswer = filtered[0].rightAnswersCount;
+        const countTotal = filtered[0].totalQuestions;
+
+        return `${countRightAnswer}/${countTotal}`;
+      }
+    }
+  };
+
   const onClickCard = (quizId) => {
     const isAcomplished = getQuizAcomplished(quizId);
     if (isAcomplished) {
@@ -42,10 +57,11 @@ export const ListQuizzes = ({ categorie }) => {
             <Card
               key={quiz.id}
               quiz={quiz}
-              isAcomplished={getQuizAcomplished(quiz.id)}
               onClick={() => onClickCard(quiz.id)}
               footer={`Criador por ${quiz.createdBy}`}
               hoverEffect={true}
+              isAcomplished={getQuizAcomplished(quiz.id)}
+              detailsAcomplished={getTextDetails(quiz.id)}
             />
           ))
         ) : (
