@@ -2091,6 +2091,11 @@ react-refresh@^0.9.0:
   resolved "https://registry.yarnpkg.com/react-refresh/-/react-refresh-0.9.0.tgz#71863337adc3e5c2f8a6bfddd12ae3bfe32aafbf"
   integrity sha512-Gvzk7OZpiqKSkxsQvO/mbTN1poglhmAV7gR/DdIrRrSMXraRQQlfikRJOr3Nb9GTMPC5kof948Zy6jJZIFtDvQ==
 
+react-simple-star-rating@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/react-simple-star-rating/-/react-simple-star-rating-3.0.0.tgz#923607b33ceb55e3c2c84fd79a6e0db64477638a"
+  integrity sha512-kxl9ucQTr1TzXGT/klBe7EMqCN9uuRoSlZqKCr9HMMriEY8rB/VwABtwELYhSClhkE0LIRpWw12EAG9hq5DOSg==
+
 react@^17.0.0:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react/-/react-17.0.2.tgz#d0b5cc516d29eb3eee383f75b62864cfb6800037"

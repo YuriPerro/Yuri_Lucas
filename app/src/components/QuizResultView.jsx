@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { useLocation } from "wouter";
 import { getQuizXp } from "../shared";
 
@@ -6,8 +6,10 @@ import Button from "../components/Button";
 import PieChart from "../components/PieChart";
 import ProgressBar from "./ProgressBar";
 
+import { Rating } from "react-simple-star-rating";
+
 function QuizResultView(props) {
-  const { quiz, rightAnswers } = props;
+  const { quiz, rightAnswers, onChangeTextRating, onChangeRating, rating } = props;
 
   const [, setLocation] = useLocation();
   const totalQuestions = quiz.questions.length;
@@ -38,6 +40,23 @@ function QuizResultView(props) {
           <ProgressBar />
         </div>
 
+        <div className="flex flex-col mb-6">
+          <span className="font-semibold pb-2">Deixe sua avaliação</span>
+          <Rating
+            className="mt-1 mb-2"
+            onClick={onChangeRating}
+            ratingValue={rating}
+            fillColor={"#FFBF00"}
+            size={35}
+          />
+          <textarea
+            id="text-rating"
+            placeholder="Digite um comentário ao professor a respeito do quiz"
+            className="text-black p-2 rounded-md text-base"
+            onChange={onChangeTextRating}
+          />
+        </div>
+
         <Button width="full" color="green" onClick={() => setLocation("/home")}>
           Escolher outro quiz
         </Button>
@@ -46,4 +65,4 @@ function QuizResultView(props) {
   );
 }
 
-export default QuizResultView;
+export default memo(QuizResultView);

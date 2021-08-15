@@ -18,7 +18,7 @@ export function StoreProvider({ children }) {
     else setTimeout(() => setIsLoading(value), 500);
   }
 
-  function addToUserXp(quiz, rightAnswersCount) {
+  function addToUserXp(quiz, rightAnswersCount, textRating) {
     if (!user || !quiz) {
       console.log("Não foi possivel addToUserXp!");
       return;
@@ -40,6 +40,9 @@ export function StoreProvider({ children }) {
 
     API.updateUserXpLevel(Number(newUserState.xp.toFixed(1)), newUserState.level, user.uid);
     API.addAcomplishedQuiz(quiz.id, user.uid, rightAnswersCount, totalQuestions);
+    if (textRating.length > 0) {
+      API.setRatingQuiz(textRating);
+    }
 
     setUser(newUserState);
   }

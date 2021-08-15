@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { memo, useMemo } from "react";
 import { Pie } from "react-chartjs-2";
 
 const PieChart = (props) => {
@@ -30,4 +30,4 @@ const PieChart = (props) => {
   );
 };
 
-export default PieChart;
+export default memo(PieChart);

@@ -16,6 +16,8 @@ function Quiz(props) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedOptionStatus, setSelectedOptionsStatus] = useState(false);
   const [rightAnswersCount, setRightAnswersCount] = useState(0);
+  const [textRating, setTextRating] = useState("");
+  const [rating, setRating] = useState(3);
 
   function selectOption(optionIndex) {
     if (showAnswer) return;
@@ -37,7 +39,7 @@ function Quiz(props) {
     } else {
       setShowFinalResult(true);
       setShowAnswer(false);
-      addToUserXp(quiz, rightAnswersCount);
+      addToUserXp(quiz, rightAnswersCount, textRating);
     }
   }
 
@@ -72,6 +74,10 @@ function Quiz(props) {
     );
   }
 
+  const onHandleChangeRating = (rating) => {
+    setRating(rating);
+  };
+
   return (
     <div
       className={`min-h-screen w-full transition-all flex flex-col items-center p-8 bg-gradient-to-b from-gray-500 ${backgroundFeedback}`}>
@@ -87,6 +93,9 @@ function Quiz(props) {
               quiz={quiz}
               rightAnswers={rightAnswersCount}
               startAnotherAttempt={startAnotherAttempt}
+              onChangeTextRating={(event) => setTextRating(event.target.value)}
+              onChangeRating={onHandleChangeRating}
+              rating={rating}
             />
           </>
         ) : (
