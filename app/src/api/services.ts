@@ -44,6 +44,56 @@ export const API = {
     }
   },
 
+  updateUserXpLevel: async (xp: number, level: number, uid: string) => {
+    try {
+      const resp = await database.ref("users/" + uid).update({
+        xp: xp,
+        level: level,
+      });
+
+      if (resp) return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  },
+
+  addAcomplishedQuiz: async (
+    quizId: string,
+    uid: string,
+    rightAnswersCount: number,
+    totalQuestions: number,
+  ) => {
+    try {
+      let acomplishedQuizzes = [];
+      const data = {
+        quizId: quizId,
+        rightAnswersCount: rightAnswersCount,
+        totalQuestions: totalQuestions,
+      };
+      const ref = await database.ref("users/" + uid).once("value");
+      const userDB = ref.val();
+
+      if (userDB) {
+        if (userDB.acomplishedQuizzes) {
+          acomplishedQuizzes = userDB.acomplishedQuizzes;
+          acomplishedQuizzes.push(data);
+        } else {
+          acomplishedQuizzes.push(data);
+        }
+      }
+
+      const resp = await database.ref("users/" + uid).update({
+        acomplishedQuizzes: acomplishedQuizzes,
+      });
+
+      if (resp) return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  },
+
   getAllQuizzes: async () => {
     try {
       const ref = database.ref(`quizes/`);
