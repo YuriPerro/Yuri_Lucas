@@ -43,11 +43,11 @@ const SearchStudent = () => {
   return (
     <div className="flex flex-col min-h-screen w-full p-8 bg-gradient-to-b from-purple-600 to-purple-800">
       <header className="flex flex-col gap-2 sm:flex-row justify-center  items-center mb-14">
-        <div className="flex items-center mr-auto">
-          <button onClick={() => setLocation("/profile")}>
+        <div className="flex items-center">
+          <button onClick={() => setLocation("/profile")} className="focus:outline-none">
             <ArrowLeftIcon className="w-8 mr-4" />
           </button>
-          <h1 className="text-3xl font-bold flex items-center gap-4 mb-1">Encontrar Amigos</h1>
+          <h1 className="text-4xl font-bold flex items-center gap-4 mb-1">Encontrar Amigos</h1>
         </div>
 
         <div className="flex gap-4 mx-auto"></div>
