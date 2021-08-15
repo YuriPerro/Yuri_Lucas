@@ -1,7 +1,7 @@
 import React from "react";
 
 function Card(props) {
-  const { quiz, isAcomplished, footer, ...rest } = props;
+  const { quiz, isAcomplished, footer, hoverEffect, ...rest } = props;
 
   const getColorByDiff = () => {
     switch (quiz.difficulty) {
@@ -28,6 +28,8 @@ function Card(props) {
     }
   };
 
+  const hoverClasses = hoverEffect ? "hover:scale-105 cursor-pointer" : "";
+
   return (
     <div
       {...rest}
@@ -35,7 +37,7 @@ function Card(props) {
         getColorByDiff()?.color
       } bg-gray-100 shadow-lg rounded-md p-4 w-full ${
         isAcomplished && "opacity-50"
-      } text-black transition-all transform hover:scale-105 cursor-pointer`}>
+      } text-black transition-all transform ${hoverClasses}`}>
       <div className="flex flex-row ">
         <span className="text-xl mb-4 font-bold text-gray-700">{quiz.title}</span>
         <div
