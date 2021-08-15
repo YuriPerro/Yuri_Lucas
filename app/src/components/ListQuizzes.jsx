@@ -47,6 +47,7 @@ export const ListQuizzes = ({ categorie }) => {
               isAcomplished={getQuizAcomplished(quiz.id)}
               onClick={() => onClickCard(quiz.id)}
               footer={`Criador por ${quiz.createdBy}`}
+              hoverEffect={true}
             />
           ))
         ) : (
