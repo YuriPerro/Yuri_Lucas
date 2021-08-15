@@ -30,4 +30,4 @@ const PieChart = (props) => {
   );
 };
 
-export default memo(PieChart);
+export default memo(PieChart, () => true);
