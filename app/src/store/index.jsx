@@ -56,7 +56,13 @@ export function StoreProvider({ children }) {
     ]);
     if (dataCategories) setCategories(Object.values(dataCategories));
     if (dataQuizzes) setQuizzes(Object.values(dataQuizzes));
-    if (dataStudents) setStudents(Object.values(dataStudents));
+    if (dataStudents) {
+      const normalizedStudents = Object.values(dataStudents).map((student) => ({
+        ...student,
+        isFriend: false,
+      }));
+      setStudents(normalizedStudents);
+    }
 
     setTimeout(() => setIsisFetching(false), 200);
   }
@@ -93,6 +99,7 @@ export function StoreProvider({ children }) {
         quizzes,
         categories,
         students,
+        setStudents,
         setQuizzes,
         didLevelUp,
         setDidLevelUp,

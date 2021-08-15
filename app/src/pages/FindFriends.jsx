@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
-import { ArrowLeftIcon, SearchIcon, UserIcon } from "@heroicons/react/outline";
+import { ArrowLeftIcon, SearchIcon, UserAddIcon, UserRemoveIcon } from "@heroicons/react/outline";
+import { UserIcon } from "@heroicons/react/solid";
 import { useLocation } from "wouter";
 import { useStore } from "../store";
 import { getXpToLevelUp } from "../shared";
@@ -10,12 +11,22 @@ import medal_star from "../assets/images/medal-star.png";
 
 const SearchStudent = () => {
   const [, setLocation] = useLocation();
-  const { students = [], user } = useStore();
+  const { students = [], setStudents, user } = useStore();
   const [search, setSearch] = useState("");
 
   function getStudentXpPercentage(student) {
     const xpToLevelUp = getXpToLevelUp(student.level);
     return ((student.xp * 100) / xpToLevelUp).toFixed(1);
+  }
+
+  function handleAddFriend(studentId) {
+    const studentIndex = students.findIndex((s) => s.uid === studentId);
+    const newState = [...students];
+    newState[studentIndex] = {
+      ...newState[studentIndex],
+      isFriend: !!!newState[studentIndex].isFriend,
+    };
+    setStudents(newState);
   }
 
   const filteredStudents = useMemo(() => {
@@ -27,7 +38,7 @@ const SearchStudent = () => {
       const searchNormalized = search.trim().toLocaleLowerCase();
       return nameNormalized.includes(searchNormalized);
     });
-  }, [search]);
+  }, [search, students]);
 
   return (
     <div className="flex flex-col min-h-screen w-full p-8 bg-gradient-to-b from-purple-600 to-purple-800">
@@ -63,13 +74,33 @@ const SearchStudent = () => {
         </div>
 
         <ul className="w-full flex justify-start gap-8">
-          {filteredStudents.map((student) => (
+          {filteredStudents.map((student, i) => (
             <li
               key={student.uid}
               className="relative bg-white py-6 px-6 rounded-3xl w-64 my-4 shadow-xl">
-              <div className=" text-white flex items-center absolute rounded-full py-4 px-4 shadow-xl bg-pink-500 left-4 -top-6">
+              <div className="text-white flex items-center absolute rounded-full py-4 px-4 shadow-xl bg-pink-500 left-4 -top-6">
                 <UserIcon className="w-10" />
               </div>
+
+              <button
+                onClick={() => handleAddFriend(student.uid)}
+                title={student.isFriend ? "Remover amigo" : "Adicionar amigo"}
+                className={`text-white flex items-center absolute top-2 right-2 rounded-full p-1 px-3 
+                shadow-xl transition-all focus:outline-none ${
+                  student.isFriend ? "bg-gray-400" : "bg-blue-500"
+                }`}>
+                {student.isFriend ? (
+                  <>
+                    <span className="ml-1">Remover</span>
+                    <UserRemoveIcon className="w-6 ml-2" />
+                  </>
+                ) : (
+                  <>
+                    <span>Adicionar</span>
+                    <UserAddIcon className="w-6 ml-2" />
+                  </>
+                )}
+              </button>
 
               <div className="mt-8 text-gray-400">
                 <p className="text-xl font-bold my-2">{student.name}</p>
