@@ -75,11 +75,11 @@ export function StoreProvider({ children }) {
   }
 
   const getAllQuizzes = async () => {
-    return API.database.ref("quizes/").on("value", (data) => {
+    return API.database.ref("quizes/").once("value", (data) => {
       const dataQuizzes = data.val();
 
       if (dataQuizzes) {
-        if (dataQuizzes) setQuizzes(Object.values(dataQuizzes));
+        setQuizzes(Object.values(dataQuizzes));
       }
     });
   };
@@ -105,7 +105,7 @@ export function StoreProvider({ children }) {
         setQuizzes,
         didLevelUp,
         setDidLevelUp,
-        fetchInitialData,
+        getAllQuizzes,
       }}>
       {children}
     </StoreContext.Provider>

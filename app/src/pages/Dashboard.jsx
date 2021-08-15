@@ -1,7 +1,7 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import { useLocation } from "wouter";
 
-import { LoginIcon, ClipboardListIcon, XCircleIcon } from "@heroicons/react/outline";
+import { LoginIcon, ClipboardListIcon, XCircleIcon, TruckIcon } from "@heroicons/react/outline";
 import Card from "../components/Card";
 import Button from "../components/Button";
 import logo from "../assets/images/logo-quizzer.png";
@@ -10,13 +10,15 @@ import { API } from "../api/services";
 
 const Dashboard = () => {
   const [, setLocation] = useLocation();
-  const { quizzes, user, fetchInitialData } = useStore();
+  const { quizzes, user, getAllQuizzes } = useStore();
 
   async function handleDeleteQuiz(quizId) {
     console.log(quizId);
     //firebase
     try {
-      await API.removeQuiz(quizId);
+      API.removeQuiz(quizId).then((res) => {
+        getAllQuizzes();
+      });
     } catch (error) {
       console.log(error);
     }
@@ -25,9 +27,14 @@ const Dashboard = () => {
   const quizzesFiltered = useMemo(() => {
     return quizzes.filter((quiz) => {
       if (!user) return true;
+      console.log("ATUALIZOU");
       return quiz.ownerUID === user.uid;
     });
   }, [quizzes]);
+
+  useEffect(() => {
+    getAllQuizzes();
+  }, []);
 
   return (
     <div className="flex flex-col w-full min-h-screen p-8 bg-gradient-to-b from-gray-400 to-gray-400">
@@ -58,6 +65,7 @@ const Dashboard = () => {
           <div className="grid grid-cols-1  sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 ">
             {quizzesFiltered.map((quiz) => (
               <div key={quiz.id} className="relative flex w-full h-full">
+                <span>{quiz.id}</span>
                 <button
                   type="button"
                   tabIndex="-1"
