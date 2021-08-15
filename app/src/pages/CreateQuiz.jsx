@@ -93,7 +93,7 @@ const CreateQuiz = () => {
         </h1>
 
         <div className="flex gap-4">
-          <Button color="green" onClick={() => setLocation("/dashboard", { replace: true })}>
+          <Button color="green" onClick={() => setLocation("/dashboard")}>
             <ClipboardListIcon className="w-6" />
             Voltar para gerenciar
           </Button>
