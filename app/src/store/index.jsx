@@ -10,6 +10,7 @@ export function StoreProvider({ children }) {
   const [user, setUser] = useState(null);
   const [quizzes, setQuizzes] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [students, setStudents] = useState([]);
 
   function setLoading(value) {
     if (value) setIsLoading(value);
@@ -43,12 +44,14 @@ export function StoreProvider({ children }) {
 
   async function fetchInitialData() {
     setIsisFetching(true);
-    const [dataQuizzes, dataCategories] = await Promise.all([
+    const [dataQuizzes, dataCategories, dataStudents] = await Promise.all([
       API.getAllQuizzes(),
       API.getAllCategories(),
+      API.getStudents(),
     ]);
     if (dataCategories) setCategories(Object.values(dataCategories));
     if (dataQuizzes) setQuizzes(Object.values(dataQuizzes));
+    if (dataStudents) setStudents(Object.values(dataStudents));
 
     setTimeout(() => setIsisFetching(false), 200);
   }
@@ -84,6 +87,7 @@ export function StoreProvider({ children }) {
         setLoading,
         quizzes,
         categories,
+        students,
         setQuizzes,
       }}>
       {children}

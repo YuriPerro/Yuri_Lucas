@@ -118,6 +118,18 @@ export const API = {
     }
   },
 
+  getStudents: async () => {
+    try {
+      const ref = database.ref(`users/`).orderByChild("usertype").equalTo("aluno");
+      const resp = (await ref.once("value")).val();
+      if (resp) return resp;
+      else return {};
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  },
+
   getQuizByCategorie: async (categorie: string) => {
     try {
       const ref = database.ref(`quizes/`).orderByChild("categorie").equalTo(categorie);

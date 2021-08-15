@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useLocation } from "wouter";
 import { useStore } from "../store";
 import Card from "./Card";
+import Modal from "./Modal";
 
 export const ListQuizzes = ({ categorie }) => {
   const [, setLocation] = useLocation();
