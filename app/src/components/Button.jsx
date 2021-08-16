@@ -6,6 +6,7 @@ const btnColors = {
   green: "bg-green-500 hover:bg-green-400",
   gray: "bg-gray-100 hover:bg-white text-gray-800",
   purple: "bg-purple-500 hover:bg-purple-400",
+  yellow: "bg-yellow-500  hover:bg-yellow-400 ",
 };
 
 const btnWidths = {

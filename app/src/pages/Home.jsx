@@ -1,7 +1,7 @@
 import React from "react";
 import { useLocation } from "wouter";
 
-import { LoginIcon, UserIcon } from "@heroicons/react/outline";
+import { LoginIcon, UserIcon, ChartBarIcon } from "@heroicons/react/outline";
 import Button from "../components/Button";
 import logo from "../assets/images/logo-quizzer.png";
 import { ListQuizzes } from "../components/ListQuizzes";
@@ -23,6 +23,10 @@ function Home() {
             Bem vindo
             <span className="font-semibold"> {user?.name}!</span>
           </span>
+          <Button color="yellow" onClick={() => setLocation("/ranking")}>
+            <ChartBarIcon className="w-6" />
+            Ranking
+          </Button>
           <Button color="green" onClick={() => setLocation("/profile")}>
             <UserIcon className="w-6" />
             Perfil

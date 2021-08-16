@@ -12,6 +12,7 @@ import CreateQuiz from "./pages/CreateQuiz";
 import LoadingView from "./components/LoadingView";
 import Profile from "./pages/Profile";
 import FindFriends from "./pages/FindFriends";
+import Ranking from "./pages/Ranking";
 
 function Routes() {
   const { isLoading, isFetching } = useStore();
@@ -30,6 +31,7 @@ function Routes() {
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/find-friends" component={FindFriends} />
+        <Route path="/ranking" component={Ranking} />
         <Redirect to="/" />
       </Switch>
     </Router>
