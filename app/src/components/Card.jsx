@@ -39,8 +39,8 @@ function Card(props) {
       } bg-gray-100 shadow-lg rounded-md  w-full text-black transition-all transform ${
         !isAcomplished && hoverClasses
       }`}>
-      <div className="p-4">
-        <div className="flex flex-row ">
+      <div className="flex flex-col flex-1 p-4 ">
+        <div className="flex flex-col">
           <span className="text-xl mb-4 font-bold text-gray-700">{quiz.title}</span>
           <div
             className={`w-16 h-6 rounded-xl p-2 flex absolute right-4 top-4 flex-row items-center justify-center bg-${
@@ -51,7 +51,7 @@ function Card(props) {
         </div>
         <p className="text-base mb-4 flex-1">{quiz.description}</p>
 
-        <span className="text-base text-gray-500">{footer}</span>
+        <span className="text-base text-gray-500 mt-auto">{footer}</span>
       </div>
 
       {isAcomplished && (
