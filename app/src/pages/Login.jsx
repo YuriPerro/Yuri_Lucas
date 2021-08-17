@@ -67,12 +67,12 @@ function Login() {
             <label htmlFor="email" className="mb-2 font-semibold">
               Email
             </label>
-            <Input type="email" id="email" required defaultValue="aluno@teste.com" />
+            <Input type="email" id="email" required />
 
             <label htmlFor="password" className="mb-2 font-semibold">
               Senha
             </label>
-            <Input type="password" id="password" minLength={4} required defaultValue="123456" />
+            <Input type="password" id="password" minLength={4} required />
 
             <label htmlFor="type" className="mb-2 font-semibold">
               Tipo de usuário
