@@ -4,10 +4,6 @@ import Card from "./Card";
 import Wrapper from "./Wrapper";
 import "../styles/index.css";
 
-const hasClasses = (classes) => {
-  return;
-};
-
 const quiz = {
   title: "Listas",
   description:
@@ -24,78 +20,81 @@ const quiz = {
   ],
 };
 
-it("Card should renders correctly", () => {
-  mount(
-    <Wrapper>
-      <Card
-        data-test="card"
-        quiz={quiz}
-        hoverEffect={true}
-        footer={`Criador por ${quiz.createdBy}`}
-        isAcomplished={false}
-        detailsAcomplished={2}
-      />
-    </Wrapper>,
-  );
+describe("Card", () => {
+  it("Should renders correctly", () => {
+    mount(
+      <Wrapper>
+        <Card
+          data-test="card"
+          quiz={quiz}
+          hoverEffect={true}
+          footer={`Criador por ${quiz.createdBy}`}
+          isAcomplished={false}
+          detailsAcomplished={2}
+        />
+      </Wrapper>,
+    );
 
-  cy.get("[data-test='card']").should("exist");
-});
+    cy.get("[data-test='card']").should("exist");
+  });
 
-it("Card should renders props texts", () => {
-  mount(
-    <Wrapper>
-      <Card
-        data-test="card"
-        quiz={quiz}
-        hoverEffect={true}
-        footer={`Criador por ${quiz.createdBy}`}
-        isAcomplished={false}
-        detailsAcomplished={2}
-      />
-    </Wrapper>,
-  );
+  it("Should renders props texts", () => {
+    mount(
+      <Wrapper>
+        <Card
+          data-test="card"
+          quiz={quiz}
+          hoverEffect={true}
+          footer={`Criador por ${quiz.createdBy}`}
+          isAcomplished={false}
+          detailsAcomplished={2}
+        />
+      </Wrapper>,
+    );
 
-  cy.get("[data-test='card']").contains("Listas");
-  cy.get("[data-test='card']").contains(quiz.description);
-  cy.get("[data-test='card']").contains("Fácil");
-  cy.get("[data-test='card']").contains(`Criador por ${quiz.createdBy}`);
-});
+    cy.get("[data-test='card']").contains("Listas").should("exist");
+    cy.get("[data-test='card']").contains(quiz.description).should("exist");
+    cy.get("[data-test='card']").contains("Fácil").should("exist");
+    cy.get("[data-test='card']").contains(`Criador por ${quiz.createdBy}`).should("exist");
+  });
 
-it("Card should be disabled if acomplished", () => {
-  mount(
-    <Wrapper>
-      <Card
-        data-test="card"
-        quiz={quiz}
-        hoverEffect={true}
-        footer={`Criador por ${quiz.createdBy}`}
-        isAcomplished={true}
-        detailsAcomplished={2}
-      />
-    </Wrapper>,
-  );
+  it("Should be disabled if acomplished", () => {
+    mount(
+      <Wrapper>
+        <Card
+          data-test="card"
+          quiz={quiz}
+          hoverEffect={true}
+          footer={`Criador por ${quiz.createdBy}`}
+          isAcomplished={true}
+          detailsAcomplished={2}
+        />
+      </Wrapper>,
+    );
 
-  cy.get("[data-test='card']").contains("Listas");
-  cy.get("[data-test='card']").contains(quiz.description);
-  cy.get("[data-test='card']").contains("Fácil");
-  cy.get("[data-test='card']").contains(`Criador por ${quiz.createdBy}`);
-});
-it("Card should renders props texts", () => {
-  mount(
-    <Wrapper>
-      <Card
-        data-test="card"
-        quiz={quiz}
-        hoverEffect={true}
-        footer={`Criador por ${quiz.createdBy}`}
-        isAcomplished={false}
-        detailsAcomplished={2}
-      />
-    </Wrapper>,
-  );
+    cy.get("[data-test='card']").contains("Listas").should("exist");
+    cy.get("[data-test='card']").contains(quiz.description).should("exist");
+    cy.get("[data-test='card']").contains("Fácil").should("exist");
+    cy.get("[data-test='card']").contains(`Criador por ${quiz.createdBy}`).should("exist");
+  });
 
-  cy.get("[data-test='card']").contains("Listas");
-  cy.get("[data-test='card']").contains(quiz.description);
-  cy.get("[data-test='card']").contains("Fácil");
-  cy.get("[data-test='card']").contains(`Criador por ${quiz.createdBy}`);
+  it("Should renders props texts", () => {
+    mount(
+      <Wrapper>
+        <Card
+          data-test="card"
+          quiz={quiz}
+          hoverEffect={true}
+          footer={`Criador por ${quiz.createdBy}`}
+          isAcomplished={false}
+          detailsAcomplished={2}
+        />
+      </Wrapper>,
+    );
+
+    cy.get("[data-test='card']").contains("Listas").should("exist");
+    cy.get("[data-test='card']").contains(quiz.description).should("exist");
+    cy.get("[data-test='card']").contains("Fácil").should("exist");
+    cy.get("[data-test='card']").contains(`Criador por ${quiz.createdBy}`).should("exist");
+  });
 });

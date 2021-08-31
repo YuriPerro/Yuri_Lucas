@@ -6,7 +6,19 @@ import { StoreProvider } from "../store";
 import "../styles/index.css";
 
 describe("Login teatcher", () => {
-  it("Component should renders and login teatcher", () => {
+  beforeEach(() => {
+    mount(
+      <StoreProvider>
+        <App />
+      </StoreProvider>,
+    );
+  });
+
+  it("Component should renders correctly", () => {
+    cy.get("[data-test='btn']").should("exist");
+  });
+
+  it("Component should renders and login teacher", () => {
     const email = "professor@teste.com";
     const password = "123456";
     const title = "Entre no Quizzer";

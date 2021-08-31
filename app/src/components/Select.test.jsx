@@ -23,7 +23,7 @@ it("Select should renders correctly", () => {
   cy.get("[data-test='select']").should("exist");
 });
 
-it("Select should not renders is loading is false", () => {
+it("Select should select options", () => {
   mount(
     <Wrapper>
       <Select
