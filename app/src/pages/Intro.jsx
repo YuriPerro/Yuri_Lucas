@@ -27,7 +27,7 @@ function Intro() {
             e muito mais.
           </p>
           <p className="mb-8"> Entre já e comece a aprender.</p>
-          <Button color="green" onClick={() => setLocation("/login")}>
+          <Button data-test="btn" color="green" onClick={() => setLocation("/login")}>
             Avançar
             <ArrowRightIcon className="w-6" />
           </Button>
