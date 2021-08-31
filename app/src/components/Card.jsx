@@ -39,7 +39,7 @@ function Card(props) {
       } bg-gray-100 shadow-lg rounded-md  w-full text-black transition-all transform ${
         !isAcomplished && hoverClasses
       }`}>
-      <div className="flex flex-col flex-1 p-4 ">
+      <div className="flex flex-col flex-1 p-4">
         <div className="flex flex-col">
           <span className="text-xl mb-4 font-bold text-gray-700">{quiz.title}</span>
           <div
