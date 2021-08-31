@@ -5,7 +5,9 @@
     "build": "vite build",
     "serve": "vite preview",
     "format": "prettier --write \"./**/*.{js,jsx,ts,tsx,json}\"",
-    "build:dev": "APP_ENV=development vite build"
+    "build:dev": "APP_ENV=development vite build",
+    "cy:run": "cypress run",
+    "test": "cypress open-ct"
   },
   "dependencies": {
     "@heroicons/react": "^1.0.1",

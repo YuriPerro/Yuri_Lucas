@@ -14,11 +14,11 @@ describe("Login", () => {
 
   it("Intro should renders texts correctly", () => {
     cy.get("[data-test='intro']").contains("Bem vindo ao Quizzer!");
-    cy.get("[data-test='btn-forward']").should("exist");
+    cy.get("[data-test='btn']").should("exist");
   });
 
   it("Intro should go to login if click button", () => {
-    cy.get("[data-test='btn-forward']").click();
+    cy.get("[data-test='btn']").click();
     cy.url().should("include", "/login");
   });
 });

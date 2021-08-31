@@ -64,12 +64,12 @@ function Login() {
           <form
             onSubmit={handleSubmit}
             className="flex flex-col w-full max-w-md ml-auto text-base bg-purple-800 shadow-lg max-w5 p-8 rounded-md">
-            <label htmlFor="email" className="mb-2 font-semibold">
+            <label data-test="input-email" htmlFor="email" className="mb-2 font-semibold">
               Email
             </label>
             <Input type="email" id="email" required />
 
-            <label htmlFor="password" className="mb-2 font-semibold">
+            <label data-test="input-password" htmlFor="password" className="mb-2 font-semibold">
               Senha
             </label>
             <Input type="password" id="password" minLength={4} required />
@@ -79,6 +79,7 @@ function Login() {
             </label>
             <Select
               id="userType"
+              data-test="select-usertype"
               required
               options={[
                 { text: "Aluno", value: "aluno" },
@@ -90,7 +91,12 @@ function Login() {
               <Link to="/signup"> Cadastrar-se</Link>
             </div>
 
-            <Button color="purple" type="submit" width="full" className="mb-4">
+            <Button
+              data-test="btn-enter"
+              color="purple"
+              type="submit"
+              width="full"
+              className="mb-4">
               Entrar
               <LogoutIcon className="w-6" />
             </Button>

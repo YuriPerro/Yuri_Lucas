@@ -41,9 +41,9 @@ it("Select should not renders is loading is false", () => {
     </Wrapper>,
   );
 
-  cy.get("[data-test='select']").select("Opção 1");
-  cy.get("[data-test='select']").select("Opção 2");
-  cy.get("[data-test='select']").select("Opção 3");
-  cy.get("[data-test='select']").select("Opção 4");
-  cy.get("[data-test='select']").select("Opção 5");
+  cy.get("[data-test='select']").select("Opção 1").should("have.value", "Opção 1");
+  cy.get("[data-test='select']").select("Opção 2").should("have.value", "Opção 2");
+  cy.get("[data-test='select']").select("Opção 3").should("have.value", "Opção 3");
+  cy.get("[data-test='select']").select("Opção 4").should("have.value", "Opção 4");
+  cy.get("[data-test='select']").select("Opção 5").should("have.value", "Opção 5");
 });
