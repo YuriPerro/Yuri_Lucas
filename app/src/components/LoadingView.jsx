@@ -9,7 +9,7 @@ function LoadingView({ isLoading }) {
 
   if (!isLoading) return null;
   return (
-    <div className="z-50">
+    <div data-test="loading" className="z-50">
       <div
         onClick={preventClick}
         className="w-full h-full fixed block top-0 left-0 bg-white opacity-20 z-50"></div>
