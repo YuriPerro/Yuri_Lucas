@@ -10,7 +10,9 @@ function Intro() {
   const [, setLocation] = useLocation();
 
   return (
-    <div className="flex justify-center w-full min-h-screen p-8 bg-gradient-to-bl from-purple-600 to-purple-500">
+    <div
+      data-test="intro"
+      className="flex justify-center w-full min-h-screen p-8 bg-gradient-to-bl from-purple-600 to-purple-500">
       <main className="flex flex-row  flex-wrap items-center justify-around w-full">
         <article className="text-xl mb-16 w-full max-w-2xl">
           <div className="w-16 mb-4">
@@ -27,7 +29,7 @@ function Intro() {
             e muito mais.
           </p>
           <p className="mb-8"> Entre já e comece a aprender.</p>
-          <Button color="green" onClick={() => setLocation("/login")}>
+          <Button data-test="btn-forward" color="green" onClick={() => setLocation("/login")}>
             Avançar
             <ArrowRightIcon className="w-6" />
           </Button>
