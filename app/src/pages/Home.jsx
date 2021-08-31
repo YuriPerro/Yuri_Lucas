@@ -23,7 +23,7 @@ function Home() {
             Bem vindo
             <span className="font-semibold"> {user?.name}!</span>
           </span>
-          <Button color="yellow" onClick={() => setLocation("/ranking")}>
+          <Button data-test="btn-ranking" color="yellow" onClick={() => setLocation("/ranking")}>
             <ChartBarIcon className="w-6" />
             Ranking
           </Button>

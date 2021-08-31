@@ -53,8 +53,9 @@ export const ListQuizzes = ({ categorie }) => {
     <section className="mb-6">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
         {quizzesFiltered.length ? (
-          quizzesFiltered.map((quiz) => (
+          quizzesFiltered.map((quiz, index) => (
             <Card
+              data-test={quiz.id}
               key={quiz.id}
               quiz={quiz}
               onClick={() => onClickCard(quiz.id)}
